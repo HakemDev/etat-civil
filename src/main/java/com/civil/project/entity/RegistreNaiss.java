@@ -1,6 +1,5 @@
 package com.civil.project.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +14,6 @@ import java.util.List;
 @Table(name = "registre")
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties
 @JsonIgnoreType
 public class RegistreNaiss {
     @GeneratedValue(strategy = GenerationType.IDENTITY)

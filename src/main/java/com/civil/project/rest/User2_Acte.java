@@ -7,6 +7,8 @@ import com.civil.project.service.User2_ActeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
+
 @RestController
 @RequestMapping("/acte")
 @RequiredArgsConstructor
@@ -19,6 +21,15 @@ public class User2_Acte {
     public ActeNaissance addActe(@RequestBody ActeNaissance acteNaissance) {
 
         return acteService.addActe(acteNaissance);
+    }
+
+    @GetMapping("")
+    public Collection<ActeNaissance> serchActe(
+            @RequestParam(required = false) String nomAr,
+            @RequestParam(required = false) String nomFr,
+            @RequestParam(required = false) String numero
+    ) {
+        return acteService.findActes(nomAr,nomFr,numero);
     }
 
     public ActeNaissance updateActe(ActeNaissance acteNaissance) {

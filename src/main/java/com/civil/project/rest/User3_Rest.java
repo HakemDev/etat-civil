@@ -20,59 +20,66 @@ public class User3_Rest {
         this.service = service;
     }
 
-    @GetMapping("/reg/nai/{date}")
-    public List<RegistreNaiss> getRegistrBydate(@PathVariable String date){
-            return service.findByDate(date);
-    }
-
-    @GetMapping("/reg/nai")
-    public List<RegistreNaiss> findRegistres(){
-        System.out.println("hey ");
-        return service.findRegistres();
-    }
-
-    @GetMapping("/regist/acte/{idActe}")
+    @GetMapping("/acte/naissance/{idActe}")
     public ActeNaissance getAct(@PathVariable int idActe)
     {
         return service.findById(idActe);
     }
 
-    @GetMapping("/regist/registr/{idActe}")
-    public RegistreNaiss getRegistres(@PathVariable int idActe)
-    {
-        return service.findByIdActe(idActe);
+    @GetMapping("/registre/naissance/{date}")
+    public List<RegistreNaiss> getRegistrBydate(@PathVariable String date){
+            return service.findByDate(date);
     }
-    @DeleteMapping("/registre/acte/delete/{id}")
+
+    @GetMapping("/registres/naissance/")
+    public List<RegistreNaiss> findRegistres(){
+        System.out.println("hey ");
+        return service.findRegistres();
+    }
+
+    @GetMapping("/registre/naissance/{idRegistre}")
+    public RegistreNaiss getRegistres(@PathVariable int idRegistre)
+    {
+        return service.findByIdRegistre(idRegistre);
+    }
+
+    @DeleteMapping("/registre/naissance/delete/{id}")
     public String deleteRegistre(@PathVariable int id)
     {
-        service.deleteActe(id);
+        service.deleteRegistre(id);
         return "delete done";
     }
+
     @PostMapping("/registre/naissance/add")
     public String addRegistre(@RequestBody RegistreNaiss registre)
     {
-        String[] dat=registre.getEdition().split("-");
+        /*String[] dat=registre.getEdition().split("-");
         registre.setAnnee(Integer.parseInt(dat[0]));
-        System.out.println(registre);
+        System.out.println(registre);*/
         service.addOrUpdateRegistre(registre);
         return "add done";
     }
+
     @PutMapping("/registre/naissance/update")
     public String UpdateRegistre(@RequestBody RegistreNaiss registre)
     {
         service.addOrUpdateRegistre(registre);
         return "update registre ";
     }
+
+    /////// partie utilisateur
     @GetMapping("/utilisateurs")
     public List<Utilisateur> getutilisateur()
     {
         return service.findUtilisateur();
     }
+
     @GetMapping("/utilisateur/{role}")
     public List<Utilisateur> findByRole(@PathVariable String role)
     {
         return service.findByRole(role);
     }
+
     @PutMapping("/utilisateur/update")
     public Utilisateur update(@RequestBody Utilisateur utilisateur)
     {

@@ -1,28 +1,20 @@
 package com.civil.project.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonIgnoreType;
-import lombok.AllArgsConstructor;
+
+
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name="registre_juge_naissance")
 @Data
-@Table(name = "registre")
-@AllArgsConstructor
-@NoArgsConstructor
-@JsonIgnoreProperties
-@JsonIgnoreType
-public class RegistreNaiss {
+public class RegistreJugeNaiss {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_registre")
     private int idRegistre;
-
     @Column(name = "id_utilisateur")
     private int idUtilisateur;
 
@@ -57,13 +49,5 @@ public class RegistreNaiss {
             cascade = {CascadeType.DETACH,CascadeType.PERSIST,
                     CascadeType.MERGE,CascadeType.REFRESH})
     @JoinColumn(name="id_registre")
-    private List<ActeNaissance> actes;
-    public void add(ActeNaissance acte)
-    {
-        if(actes==null){
-            actes=new ArrayList<>();
-        }
-        actes.add(acte);
-//    /registre.setUtilisateur(this);
-    }
+    private List<ActeJugeNaissancee> actesjugenaissancee;
 }

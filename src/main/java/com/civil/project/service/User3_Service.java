@@ -7,23 +7,18 @@ import com.civil.project.entity.Utilisateur;
 import java.util.List;
 
 public interface User3_Service {
-
-    public List<RegistreNaiss> findByDate(String date);
-    public List<RegistreNaiss> findRegistres();
-
     public ActeNaissance findById(int idActe);
 
-    public RegistreNaiss findByIdActe(int idActe);
-
-    public void deleteActe(int id);
-
+    ///partie registre de naissance
+    public List<RegistreNaiss> findByDate(String date);
+    public List<RegistreNaiss> findRegistres();
+    public RegistreNaiss findByIdRegistre(int idRegistre);
+    public void deleteRegistre(int id);
     public void addOrUpdateRegistre(RegistreNaiss registre);
 
+    ///Partie utilisateur
     List<Utilisateur> findUtilisateur();
-
     List<Utilisateur> findByRole(String role);
-
     void addOrUpdateUser(Utilisateur utilisateur);
-
     void deleteUtilisateur(int id);
 }

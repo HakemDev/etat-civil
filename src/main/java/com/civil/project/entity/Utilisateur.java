@@ -3,6 +3,8 @@ package com.civil.project.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIgnoreType;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -45,8 +47,25 @@ public class Utilisateur {
     @OneToMany(fetch = FetchType.EAGER,
             cascade = {CascadeType.DETACH,CascadeType.PERSIST,
                     CascadeType.MERGE,CascadeType.REFRESH})
+    @Fetch(value = FetchMode.SUBSELECT)
     @JoinColumn(name="id_utilisateur")
     private List<RegistreNaiss> registres;
+
+    @OneToMany(fetch = FetchType.EAGER,
+            cascade = {CascadeType.DETACH,CascadeType.PERSIST,
+                    CascadeType.MERGE,CascadeType.REFRESH})
+    @Fetch(value = FetchMode.SUBSELECT)
+    @JoinColumn(name="id_utilisateur")
+    //@JsonIgnore
+    private List<RegistreJugeNaiss> registresjugenaissa;
+
+    public List<RegistreJugeNaiss> getRegistresjugenaissa() {
+        return registresjugenaissa;
+    }
+
+    public void setRegistresjugenaissa(List<RegistreJugeNaiss> registresjugenaissa) {
+        this.registresjugenaissa = registresjugenaissa;
+    }
 
     public String getNom_ar() {
         return nom_ar;

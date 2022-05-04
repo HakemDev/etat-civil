@@ -7,8 +7,10 @@ import com.civil.project.entity.ActeNaissance;
 import com.civil.project.entity.RegistreNaiss;
 import com.civil.project.entity.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -49,27 +51,26 @@ public class User3_ServiceImpl implements User3_Service{
     public List<RegistreNaiss> findByDate(String date) {
         return registreRepository.findByDate(date);
     }
+
+    @Override
+    public List<RegistreNaiss> findByAnnee(int annee) {
+        return registreRepository.findByAnnee(annee);
+    }
+
+
     //chercher tous les registres de naissance
     @Override
     public List<RegistreNaiss> findRegistres() {
-        System.out.println("heyyyy+ "+registreRepository.findAll());
         return registreRepository.findAll();
     }
     //chercher le registre de naissance a partir de son id
     @Override
     public RegistreNaiss findByIdRegistre(int idRegistre) {
         Optional<RegistreNaiss> resultat=registreRepository.findById(idRegistre);
+        if( !resultat.isPresent())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Registre non trouve");
 
-        RegistreNaiss Registres=null;
-        if(resultat.isPresent())
-        {
-            //acte=resultat.get();
-            Registres=resultat.get();
-        }
-        else {
-            throw new RuntimeException("Registre non trouve");
-        }
-        return Registres;
+        return resultat.get();
     }
     // supprimer le registre de naissance a partir de son id
     @Override

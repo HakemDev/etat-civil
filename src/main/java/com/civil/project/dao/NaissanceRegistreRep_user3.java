@@ -13,6 +13,7 @@ public interface NaissanceRegistreRep_user3 extends JpaRepository<RegistreNaiss,
     @Query("select r from RegistreNaiss r where r.annee=:d")
     List<RegistreNaiss> findByDate(@Param("d") String date);
 
+    List<RegistreNaiss> findByAnnee(int annee);
 
     RegistreNaiss findRegistreNaissByAnneeAndPartie(Integer annee,Integer partie);
 

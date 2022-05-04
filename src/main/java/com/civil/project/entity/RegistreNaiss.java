@@ -2,12 +2,14 @@ package com.civil.project.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreType;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -21,11 +23,8 @@ public class RegistreNaiss {
     @Column(name = "id_registre")
     private int idRegistre;
 
-    @Column(name = "id_utilisateur")
-    private int idUtilisateur;
-
-    @Column(name="date_edition")
-    private  String edition;
+    //@Column(name = "id_utilisateur")
+    //private int idUtilisateur;
 
     @Column(name = "tribunal_ar")
     private String tribunalAr;
@@ -48,8 +47,30 @@ public class RegistreNaiss {
     @Column(name = "annee")
     private int annee;
 
+    private Date dateEdition;
+
+    @Transient
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private int dernierNombre;
+
     @Column(name="partie")
     private int partie;
+
+    public int getNombreActes() {
+        return actes == null ? 0 : actes.size();
+    }
+
+    public int getDernierNumero() {
+        if(actes == null || actes.isEmpty())
+            return 0;
+        return actes.get(actes.size()-1).getNumeroActe();
+    }
+
+    public int getPremierNumero() {
+        if(actes == null || actes.isEmpty())
+            return 0;
+        return actes.get(0).getNumeroActe();
+    }
 
     @OneToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH,CascadeType.PERSIST,

@@ -15,6 +15,7 @@ public interface User3_Service {
     public RegistreNaiss findByIdRegistre(int idRegistre);
     public void deleteRegistre(int id);
     public void addOrUpdateRegistre(RegistreNaiss registre);
+    List<RegistreNaiss> findByAnnee(int annee);
 
     ///Partie utilisateur
     List<Utilisateur> findUtilisateur();

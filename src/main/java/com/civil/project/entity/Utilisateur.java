@@ -7,6 +7,7 @@ import lombok.Data;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -58,22 +59,18 @@ public class Utilisateur {
     //@JsonIgnore
     private List<RegistreJugeNaiss> registresjugenaissa;
 
-    
-
-    public Utilisateur(int id, String nom_ar, String nom_fr, String prenom_ar, String prenom_fr, String role, String mot_de_passe, String login, int id_commune, List<RegistreNaiss> registres) {
-        this.id = id;
-        this.nom_ar = nom_ar;
-        this.nom_fr = nom_fr;
-        this.prenom_ar = prenom_ar;
-        this.prenom_fr = prenom_fr;
+    public Utilisateur(String nomAr, String nomFr, String prenomAr, String prenomFr, String role, String motDePasse, String login, int idCommune, List<RegistreNaiss> registres, List<RegistreJugeNaiss> registresjugenaissa) {
+        this.nomAr = nomAr;
+        this.nomFr = nomFr;
+        this.prenomAr = prenomAr;
+        this.prenomFr = prenomFr;
         this.role = role;
-        this.mot_de_passe = mot_de_passe;
+        this.motDePasse = motDePasse;
         this.login = login;
-        this.id_commune = id_commune;
+        this.idCommune = idCommune;
         this.registres = registres;
+        this.registresjugenaissa = registresjugenaissa;
     }
-
-
 
     public Utilisateur() {
     }
@@ -91,16 +88,16 @@ public class Utilisateur {
     public String toString() {
         return "Utilisateur{" +
                 "id=" + id +
-                ", nom_ar='" + nom_ar + '\'' +
-                ", nom_fr='" + nom_fr + '\'' +
-                ", prenom_ar='" + prenom_ar + '\'' +
-                ", prenom_fr='" + prenom_fr + '\'' +
+                ", nomAr='" + nomAr + '\'' +
+                ", nomFr='" + nomFr + '\'' +
+                ", prenomAr='" + prenomAr + '\'' +
+                ", prenomFr='" + prenomFr + '\'' +
                 ", role='" + role + '\'' +
-                ", mot_de_passe='" + mot_de_passe + '\'' +
+                ", motDePasse='" + motDePasse + '\'' +
                 ", login='" + login + '\'' +
-                ", id_commune=" + id_commune +
+                ", idCommune=" + idCommune +
                 ", registres=" + registres +
+                ", registresjugenaissa=" + registresjugenaissa +
                 '}';
     }
-
 }

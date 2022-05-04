@@ -26,12 +26,8 @@ public class User2_Acte {
         return acteService.addActe(acteNaissance);
     }
 
-
-    public ActeNaissance updateActe(ActeNaissance acteNaissance) {
-        return acteService.updateActe(acteNaissance);
-
     @GetMapping("")
-    public Collection<ActeNaissance> serchActe(
+    public Collection<ActeNaissance> searchActe(
             @RequestParam(required = false) String nomAr,
             @RequestParam(required = false) String nomFr,
             @RequestParam(required = false) String numero

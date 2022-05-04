@@ -5,7 +5,9 @@ import com.civil.project.dao.NaissanceRegistreRep_user3;
 import com.civil.project.entity.ActeNaissance;
 import com.civil.project.entity.RegistreNaiss;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 
@@ -19,11 +21,20 @@ public class User2_ActeServiceImpl implements User2_ActeService {
 
     @Override
     public ActeNaissance addActe(ActeNaissance acteNaissance) {
-        RegistreNaiss registre = registreRepo.findRegistreNaissByAnneeAndPartie(
+        RegistreNaiss registreNaiss = registreRepo.findRegistreNaissByAnneeAndPartie(
                 acteNaissance.getRegistre().getAnnee(),
                 acteNaissance.getRegistre().getPartie()
         );
-        acteNaissance.setRegistre(registre);
+
+
+        if(registreNaiss == null){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    String.format("Le registre %d/%d n'exsite pas",
+                            acteNaissance.getRegistre().getAnnee(),
+                            acteNaissance.getRegistre().getPartie()));
+        }
+
+        acteNaissance.setRegistre(registreNaiss);
         return repo.save(acteNaissance);
     }
 

@@ -1,13 +1,15 @@
 package com.civil.project.rest;
 
+
+
 import com.civil.project.dao.NaissanceRegistreRep_user3;
 import com.civil.project.entity.ActeNaissance;
 import com.civil.project.entity.RegistreNaiss;
 import com.civil.project.service.User2_ActeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Collection;
+
 
 @RestController
 @RequestMapping("/acte")
@@ -20,8 +22,13 @@ public class User2_Acte {
     @PostMapping("")
     public ActeNaissance addActe(@RequestBody ActeNaissance acteNaissance) {
 
+
         return acteService.addActe(acteNaissance);
     }
+
+
+    public ActeNaissance updateActe(ActeNaissance acteNaissance) {
+        return acteService.updateActe(acteNaissance);
 
     @GetMapping("")
     public Collection<ActeNaissance> serchActe(
@@ -40,6 +47,5 @@ public class User2_Acte {
         acteService.deleteActe(idActe);
     }
 }
-
 
 

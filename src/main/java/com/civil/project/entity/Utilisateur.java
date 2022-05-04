@@ -1,19 +1,18 @@
 package com.civil.project.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import lombok.Data;
+
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "utilisateur")
-@JsonIgnoreProperties
 @JsonIgnoreType
+@Data
 public class Utilisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,28 +20,28 @@ public class Utilisateur {
     private int id;
 
     @Column(name="nom_ar")
-    private String nom_ar;
+    private String nomAr;
 
     @Column(name="nom_fr")
-    private String nom_fr;
+    private String nomFr;
 
     @Column(name="prenom_ar")
-    private String prenom_ar;
+    private String prenomAr;
 
     @Column(name="prenom_fr")
-    private String prenom_fr;
+    private String prenomFr;
 
     @Column(name="role")
     private String role;
 
     @Column(name="mot_de_passe")
-    private String mot_de_passe;
+    private String motDePasse;
 
     @Column(name="login")
     private String login;
 
     @Column(name="id_commune")
-    private int id_commune;
+    private int idCommune;
 
     @OneToMany(fetch = FetchType.EAGER,
             cascade = {CascadeType.DETACH,CascadeType.PERSIST,
@@ -59,93 +58,7 @@ public class Utilisateur {
     //@JsonIgnore
     private List<RegistreJugeNaiss> registresjugenaissa;
 
-    public List<RegistreJugeNaiss> getRegistresjugenaissa() {
-        return registresjugenaissa;
-    }
-
-    public void setRegistresjugenaissa(List<RegistreJugeNaiss> registresjugenaissa) {
-        this.registresjugenaissa = registresjugenaissa;
-    }
-
-    public String getNom_ar() {
-        return nom_ar;
-    }
-
-    public void setNom_ar(String nom_ar) {
-        this.nom_ar = nom_ar;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNom_fr() {
-        return nom_fr;
-    }
-
-    public void setNom_fr(String nom_fr) {
-        this.nom_fr = nom_fr;
-    }
-
-    public String getPrenom_ar() {
-        return prenom_ar;
-    }
-
-    public void setPrenom_ar(String prenom_ar) {
-        this.prenom_ar = prenom_ar;
-    }
-
-    public String getPrenom_fr() {
-        return prenom_fr;
-    }
-
-    public void setPrenom_fr(String prenom_fr) {
-        this.prenom_fr = prenom_fr;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String getMot_de_passe() {
-        return mot_de_passe;
-    }
-
-    public void setMot_de_passe(String mot_de_passe) {
-        this.mot_de_passe = mot_de_passe;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public int getId_commune() {
-        return id_commune;
-    }
-
-    public void setId_commune(int id_commune) {
-        this.id_commune = id_commune;
-    }
-
-    public List<RegistreNaiss> getRegistres() {
-        return registres;
-    }
-
-    public void setRegistres(List<RegistreNaiss> registres) {
-        this.registres = registres;
-    }
+    
 
     public Utilisateur(int id, String nom_ar, String nom_fr, String prenom_ar, String prenom_fr, String role, String mot_de_passe, String login, int id_commune, List<RegistreNaiss> registres) {
         this.id = id;
@@ -189,4 +102,5 @@ public class Utilisateur {
                 ", registres=" + registres +
                 '}';
     }
+
 }

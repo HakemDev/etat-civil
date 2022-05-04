@@ -1,6 +1,6 @@
 package com.civil.project.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,8 +15,6 @@ import java.util.List;
 @Table(name = "registre")
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties
-@JsonIgnoreType
 public class RegistreNaiss {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -57,7 +55,9 @@ public class RegistreNaiss {
             cascade = {CascadeType.DETACH,CascadeType.PERSIST,
                     CascadeType.MERGE,CascadeType.REFRESH})
     @JoinColumn(name="id_registre")
+    @JsonIgnore
     private List<ActeNaissance> actes;
+
     public void add(ActeNaissance acte)
     {
         if(actes==null){

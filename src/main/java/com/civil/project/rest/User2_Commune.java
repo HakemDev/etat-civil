@@ -27,3 +27,4 @@ public class User2_Commune {
         communeService.deleteCommune(idActe);
     }
 }
+

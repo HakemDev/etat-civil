@@ -30,6 +30,12 @@ public class RegistreJugeNaiss {
     @Column(name="partie")
     private int partie;
 
+    @Column(name = "premier_numero")
+    private int premierNumero;
+
+    @Column(name = "dernier_numero")
+    private int dernierNumero;
+
     @OneToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH,CascadeType.PERSIST,
                     CascadeType.MERGE,CascadeType.REFRESH})

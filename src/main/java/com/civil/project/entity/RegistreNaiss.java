@@ -34,6 +34,12 @@ public class RegistreNaiss {
     @Column(name = "date_edition")
     private Date dateEdition;
 
+    @Column(name = "premier_numero")
+    private int premierNumero;
+
+    @Column(name = "dernier_numero")
+    private int dernierNumero;
+    
     @Column(name = "partie")
     private int partie;
 

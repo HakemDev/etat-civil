@@ -58,6 +58,17 @@ public class User3_ServiceImpl implements User3_Service{
     }
 
 
+    public RegistreNaiss findRegistreNaissByAnneeAndPartie(Integer annee,Integer partie){
+        RegistreNaiss registreNaissByAnneeAndPartie = registreRepository.findRegistreNaissByAnneeAndPartie(annee, partie);
+
+        if(registreNaissByAnneeAndPartie == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Registre non trouve");
+        }
+
+        return registreNaissByAnneeAndPartie;
+    }
+
+
     //chercher tous les registres de naissance
     @Override
     public List<RegistreNaiss> findRegistres() {

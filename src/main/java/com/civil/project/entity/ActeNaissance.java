@@ -36,9 +36,7 @@ public class ActeNaissance {
     
     @Column(name = "annee")
     private Integer annee;
-    
-    @Column(name = "adresse_parent")
-    private String adresseParent;
+
     
     @Column(name = "heure_naissance")
     private String heureNaissance;
@@ -75,21 +73,18 @@ public class ActeNaissance {
     
     @Column(name = "sex_fr")
     private String sexFr;
-    
-    @Column(name = "nom_pere_ar")
-    private String nomPereAr;
-    
-    @Column(name = "nom_pere_fr")
-    private String nomPereFr;
-    
+
     @Column(name = "prenom_pere_ar")
     private String prenomPereAr;
     
     @Column(name = "prenom_pere_fr")
     private String prenomPereFr;
     
-    @Column(name = "lieu_naissance_pere")
-    private String lieuNaissancePere;
+    @Column(name = "lieu_naissance_pere_ar")
+    private String lieuNaissancePereAr;
+
+    @Column(name = "lieu_naissance_pere_fr")
+    private String lieuNaissancePereFr;
     
     @Column(name = "nationalite_pere_ar")
     private String nationalitePereAr;
@@ -126,13 +121,7 @@ public class ActeNaissance {
     
     @Column(name = "annee_naissance_pere")
     private Integer anneeNaissancePere;
-    
-    @Column(name = "nom_mere_ar")
-    private String nomMereAr;
-    
-    @Column(name = "nom_mere_fr")
-    private String nomMereFr;
-    
+
     @Column(name = "prenom_mere_ar")
     private String prenomMereAr;
     
@@ -142,8 +131,11 @@ public class ActeNaissance {
     @Column(name = "annee_naissance_mere")
     private Integer anneeNaissanceMere;
     
-    @Column(name = "lieu_naissance_mere")
-    private String lieuNaissanceMere;
+    @Column(name = "lieu_naissance_mere_ar")
+    private String lieuNaissanceMereAr;
+
+    @Column(name = "lieu_naissance_mere_fr")
+    private String lieuNaissanceMereFr;
     
     @Column(name = "profession_mere_ar")
     private String professionMereAr;
@@ -204,6 +196,21 @@ public class ActeNaissance {
 
     @Column(name = "type_declaration_fr")
     private String typeDeclarationFr;
+
+    @Column
+    private boolean mereDefunte;
+
+    @Column
+    private boolean pereDefunt;
+
+    @Column
+    private boolean jumeaux;
+
+    @Column
+    private String acteAr;
+
+    @Column
+    private String acteFr;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH,CascadeType.PERSIST,
             CascadeType.MERGE,CascadeType.REFRESH})

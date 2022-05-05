@@ -1,7 +1,6 @@
 package com.civil.project.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,32 +25,13 @@ public class RegistreNaiss {
     //@Column(name = "id_utilisateur")
     //private int idUtilisateur;
 
-    @Column(name = "tribunal_ar")
-    private String tribunalAr;
-
-    @Column(name = "tribunal_fr")
-    private String tribunalFr;
-
-    @Column(name = "region_fr")
-    private String regionFr;
-
-    @Column(name = "ville_fr")
-    private String villeFr;
-
-    @Column(name = "region_ar")
-    private String regionAr;
-
-    @Column(name = "ville_ar")
-    private String villeAr;
+    @Column(name = "tribunal")
+    private String tribunal;
 
     @Column(name = "annee")
     private int annee;
 
     private Date dateEdition;
-
-    @Transient
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private int dernierNombre;
 
     @Column(name="partie")
     private int partie;

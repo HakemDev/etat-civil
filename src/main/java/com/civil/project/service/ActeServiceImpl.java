@@ -13,7 +13,7 @@ import java.util.*;
 
 @Service
 @RequiredArgsConstructor
-public class User2_ActeServiceImpl implements User2_ActeService {
+public class ActeServiceImpl implements ActeService {
 
     private final NaissanceActeRep_user2 repo;
 
@@ -28,11 +28,24 @@ public class User2_ActeServiceImpl implements User2_ActeService {
 
 
         if(registreNaiss == null){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     String.format("Le registre %d/%d n'exsite pas",
                             acteNaissance.getRegistre().getAnnee(),
                             acteNaissance.getRegistre().getPartie()));
         }
+
+        for(ActeNaissance acte : registreNaiss.getActes()) {
+            if(acteNaissance.getNumeroActe() == acte.getNumeroActe()){
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                        String.format("L'acte numero %d dans le registre %d/%d existe deja",
+                                acteNaissance.getNumeroActe(),
+                                acteNaissance.getRegistre().getAnnee(),
+                                acteNaissance.getRegistre().getPartie()));
+            }
+        }
+
+        registreNaiss.setNombreActes(registreNaiss.getNombreActes() + 1);
+        registreNaiss.setDernierNumero(acteNaissance.getNumeroActe());
 
         acteNaissance.setRegistre(registreNaiss);
         return repo.save(acteNaissance);
@@ -40,12 +53,29 @@ public class User2_ActeServiceImpl implements User2_ActeService {
 
     @Override
     public ActeNaissance updateActe(ActeNaissance acteNaissance) {
-        return repo.save(acteNaissance);
+
+        if(acteNaissance == null){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Acte invalide");
+        }
+
+        if( !repo.findById(acteNaissance.getIdNaissance()).isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Acte non existant");
+        }
+
+        return addActe(acteNaissance);
     }
 
     @Override
     public void deleteActe(Integer idActe) {
         repo.deleteById(idActe);
+    }
+
+    @Override
+    public ActeNaissance findActeById(Integer idActe) {
+        Optional<ActeNaissance> acteNaissance = repo.findById(idActe);
+        if(!acteNaissance.isPresent())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Acte non trouve");
+          return acteNaissance.get();
     }
 
     @Override

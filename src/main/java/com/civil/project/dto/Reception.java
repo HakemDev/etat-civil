@@ -15,4 +15,9 @@ public class Reception {
     private int NbrActeDeces;
     private int NbrActeJugeDeces;
 
+    private float PourcentageActeDeNaissance;
+    private float PourcentageActedejugeNaissance;
+    private float PourcentageActeDeces;
+    private float PourcentageActeJugeDeces;
+
 }

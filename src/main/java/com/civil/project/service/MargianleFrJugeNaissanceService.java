@@ -1,10 +1,11 @@
 package com.civil.project.service;
 
+
 import com.civil.project.entity.MargJugeNaissFr;
 
 import java.util.List;
 
-public interface MargianleFrJugeNaissance {
+public interface MargianleFrJugeNaissanceService {
 
     //////////////////////////////Partie Marginale francais de juge de naissance
     void AjouterOuModifierMargFR(MargJugeNaissFr margJugeNaissFr);

@@ -1,7 +1,7 @@
 package com.civil.project.rest;
 
 import com.civil.project.entity.MargJugeNaissFr;
-import com.civil.project.service.MargianleFrJugeNaissance;
+import com.civil.project.service.MargianleFrJugeNaissanceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +11,7 @@ import java.util.List;
 @RequestMapping("/jugeNaissance")
 @RequiredArgsConstructor
 public class MarginaleFrJugeNaissanceRest {
-    private final MargianleFrJugeNaissance jugeNaissance;
+    private final MargianleFrJugeNaissanceService jugeNaissance;
 
 /////////////////////////////Partie Marginale francais de juge de naissance
 

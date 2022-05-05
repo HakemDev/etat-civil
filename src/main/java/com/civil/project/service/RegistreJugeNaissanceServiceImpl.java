@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class RegistreJugeNaissanceImpl implements RegistreJugeNaissance{
+public class RegistreJugeNaissanceServiceImpl implements RegistreJugeNaissanceService{
     private final JugeNaissanceRegistreRep jugeNaissanceRegistreRep;
 
 /////////////////////partie registre de jug de naissance

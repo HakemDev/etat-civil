@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class ActeJugeNaissanceImpl implements ActeJugeNaissance{
+    public class ActeJugeNaissanceServiceImpl implements ActeJugeNaissanceService{
     private final JugeNaissanceActeRep jugeNaissanceActeRep;
 
     @Override

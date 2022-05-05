@@ -2,12 +2,13 @@ package com.civil.project.rest;
 
 
 
-import com.civil.project.dao.NaissanceRegistreRep_user3;
 import com.civil.project.entity.ActeNaissance;
-import com.civil.project.entity.RegistreNaiss;
-import com.civil.project.service.User2_ActeService;
+import com.civil.project.service.ActeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.util.Collection;
 
 
@@ -17,7 +18,7 @@ import java.util.Collection;
 @CrossOrigin
 public class User2_Acte {
 
-    private final User2_ActeService acteService;
+    private final ActeService acteService;
 
     @PostMapping("")
     public ActeNaissance addActe(@RequestBody ActeNaissance acteNaissance) {
@@ -35,7 +36,19 @@ public class User2_Acte {
         return acteService.findActes(nomAr,nomFr,numero);
     }
 
-    public ActeNaissance updateActe(ActeNaissance acteNaissance) {
+    @GetMapping("/{idActe}")
+    public ActeNaissance findActeById(@PathVariable String idActe) {
+        try {
+            return acteService.findActeById(Integer.parseInt(idActe));
+        }
+        catch (NumberFormatException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Identificateur invalide");
+        }
+    }
+
+    @PutMapping("")
+    @ResponseStatus(HttpStatus.OK)
+    public ActeNaissance updateActe(@RequestBody ActeNaissance acteNaissance) {
        return acteService.updateActe(acteNaissance);
     }
 

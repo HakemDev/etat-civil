@@ -1,6 +1,5 @@
 package com.civil.project.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import lombok.AllArgsConstructor;
@@ -17,7 +16,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Marg_nais_fr {
+public class MargNaisFr {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_marg_fr")
@@ -27,10 +26,10 @@ public class Marg_nais_fr {
     private int idActeNais;
 
     @Column(name = "marginale_txt_fr")
-    private String marginale_txt_fr;
+    private String marginaleTxtFr;
 
     @Column(name = "libelle_marginale_fr")
-    private String libelle_marginale_fr;
+    private String libelleMarginaleFr;
 
 
 }

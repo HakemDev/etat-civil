@@ -1,12 +1,14 @@
 package com.civil.project.entity;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Data
+@ToString
 @Table(name = "acte_naissance", schema = "etat_civil")
 public class ActeNaissance {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -202,11 +204,10 @@ public class ActeNaissance {
 
     @Column(name = "type_declaration_fr")
     private String typeDeclarationFr;
-/*
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH,CascadeType.PERSIST,
             CascadeType.MERGE,CascadeType.REFRESH})
     @JoinColumn(name = "id_registre")
     private RegistreNaiss registre;
-*/
 
 }

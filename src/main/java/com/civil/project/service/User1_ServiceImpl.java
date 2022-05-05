@@ -2,10 +2,9 @@ package com.civil.project.service;
 
 import com.civil.project.dao.Naissance_Marg_ar_Rep_user1;
 import com.civil.project.dao.Naissance_Marg_fr_Rep_user1;
-import com.civil.project.entity.Marg_nais_ar;
-import com.civil.project.entity.Marg_nais_fr;
+import com.civil.project.entity.MargNaisAr;
+import com.civil.project.entity.MargNaisFr;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -21,7 +20,7 @@ public class User1_ServiceImpl implements User1_Service{
     private final Naissance_Marg_fr_Rep_user1 marg_fr_rep;
 
     @Override
-    public void saveOrUpdate_marginale_fr(Marg_nais_fr marginale_fr) {
+    public void saveOrUpdate_marginale_fr(MargNaisFr marginale_fr) {
         marg_fr_rep.save(marginale_fr);
 
     }
@@ -33,18 +32,18 @@ public class User1_ServiceImpl implements User1_Service{
     }
 
     @Override
-    public List<Marg_nais_fr> getAllMarg_fr() {
+    public List<MargNaisFr> getAllMarg_fr() {
         System.out.println(marg_fr_rep.findAll());
         return marg_fr_rep.findAll();
     }
 
     @Override
-    public List<Marg_nais_fr> getById_acte_nais_Marg_fr(int id) {
+    public List<MargNaisFr> getById_acte_nais_Marg_fr(int id) {
         return marg_fr_rep.findByIdActeNais(id);
     }
 
     @Override
-    public void saveOrUpdate_marginale_ar(Marg_nais_ar marginale_ar) {
+    public void saveOrUpdate_marginale_ar(MargNaisAr marginale_ar) {
         marg_ar_rep.save(marginale_ar);
 
     }
@@ -55,12 +54,12 @@ public class User1_ServiceImpl implements User1_Service{
     }
 
     @Override
-    public List<Marg_nais_ar> getAllMarg_ar() {
-        return (List<Marg_nais_ar>) marg_ar_rep.findAll();
+    public List<MargNaisAr> getAllMarg_ar() {
+        return marg_ar_rep.findAll();
     }
 
     @Override
-    public List<Marg_nais_ar> getById_acte_nais_Marg_ar(int id) {
+    public List<MargNaisAr> getById_acte_nais_Marg_ar(int id) {
         return marg_ar_rep.findByIdActeNais(id);
     }
 }

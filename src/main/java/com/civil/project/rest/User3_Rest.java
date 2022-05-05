@@ -5,12 +5,15 @@ import com.civil.project.entity.RegistreNaiss;
 import com.civil.project.entity.Utilisateur;
 import com.civil.project.service.User3_Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.Column;
 import java.util.List;
 
 
 @RestController
+@CrossOrigin
 @RequestMapping("/user3")
 public class User3_Rest {
 
@@ -26,15 +29,10 @@ public class User3_Rest {
         return service.findById(idActe);
     }
 
-    @GetMapping("/registre/naissance/{date}")
-    public List<RegistreNaiss> getRegistrBydate(@PathVariable String date){
-            return service.findByDate(date);
-    }
-
-    @GetMapping("/registres/naissance/")
-    public List<RegistreNaiss> findRegistres(){
-        System.out.println("hey ");
-        return service.findRegistres();
+    @GetMapping("/registre/naissance")
+    public List<RegistreNaiss> findRegistres(@RequestParam(required = false) Integer annee ){
+        return annee != null ? service.findByAnnee(annee) :
+                service.findRegistres();
     }
 
     @GetMapping("/registre/naissance/{idRegistre}")
@@ -50,14 +48,12 @@ public class User3_Rest {
         return "delete done";
     }
 
-    @PostMapping("/registre/naissance/add")
-    public String addRegistre(@RequestBody RegistreNaiss registre)
+    @PostMapping("/registre/naissance")
+    @ResponseStatus(HttpStatus.CREATED)
+    public RegistreNaiss addRegistre(@RequestBody RegistreNaiss registre)
     {
-        /*String[] dat=registre.getEdition().split("-");
-        registre.setAnnee(Integer.parseInt(dat[0]));
-        System.out.println(registre);*/
         service.addOrUpdateRegistre(registre);
-        return "add done";
+        return registre;
     }
 
     @PutMapping("/registre/naissance/update")

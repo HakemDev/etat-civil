@@ -1,8 +1,6 @@
 package com.civil.project.rest;
 
-import com.civil.project.entity.ActeNaissance;
 import com.civil.project.entity.Commune;
-import com.civil.project.service.User2_ActeService;
 import com.civil.project.service.User2_CommuneService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;

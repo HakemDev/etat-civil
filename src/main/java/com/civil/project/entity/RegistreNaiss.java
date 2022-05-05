@@ -7,9 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Data
@@ -31,8 +29,6 @@ public class RegistreNaiss {
     @Column(name = "annee")
     private int annee;
 
-    @Column(name = "date_edition")
-    private Date dateEdition;
 
     @Column(name = "premier_numero")
     private int premierNumero;
@@ -40,24 +36,15 @@ public class RegistreNaiss {
     @Column(name = "dernier_numero")
     private int dernierNumero;
 
-    @Column(name = "partie")
+
+    @Column(name = "nombre_actes")
+    private int nombreActes;
+  
+    @Column(name = "date_edition")
+    private Date dateEdition;
+
+    @Column(name="partie")
     private int partie;
-
-    public int getNombreActes() {
-        return actes == null ? 0 : actes.size();
-    }
-
-    public int getDernierNumero() {
-        if(actes == null || actes.isEmpty())
-            return 0;
-        return actes.get(actes.size()-1).getNumeroActe();
-    }
-
-    public int getPremierNumero() {
-        if(actes == null || actes.isEmpty())
-            return 0;
-        return actes.get(0).getNumeroActe();
-    }
 
     @OneToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH,CascadeType.PERSIST,

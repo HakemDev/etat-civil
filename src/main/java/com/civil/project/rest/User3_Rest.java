@@ -2,13 +2,11 @@ package com.civil.project.rest;
 
 import com.civil.project.entity.ActeNaissance;
 import com.civil.project.entity.RegistreNaiss;
-import com.civil.project.entity.Utilisateur;
-import com.civil.project.service.User3_Service;
+import com.civil.project.service.RegistreNaissService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.Column;
 import java.util.List;
 
 
@@ -17,9 +15,9 @@ import java.util.List;
 @RequestMapping("/user3")
 public class User3_Rest {
 
-    private User3_Service service;
+    private RegistreNaissService service;
     @Autowired
-    public User3_Rest(User3_Service service) {
+    public User3_Rest(RegistreNaissService service) {
         this.service = service;
     }
 
@@ -52,46 +50,15 @@ public class User3_Rest {
     @ResponseStatus(HttpStatus.CREATED)
     public RegistreNaiss addRegistre(@RequestBody RegistreNaiss registre)
     {
-        service.addOrUpdateRegistre(registre);
+        service.addRegistre(registre);
         return registre;
     }
 
     @PutMapping("/registre/naissance/update")
     public String UpdateRegistre(@RequestBody RegistreNaiss registre)
     {
-        service.addOrUpdateRegistre(registre);
+        service.addRegistre(registre);
         return "update registre ";
     }
 
-    /////// partie utilisateur
-    @GetMapping("/utilisateurs")
-    public List<Utilisateur> getutilisateur()
-    {
-        return service.findUtilisateur();
-    }
-
-    @GetMapping("/utilisateur/{role}")
-    public List<Utilisateur> findByRole(@PathVariable String role)
-    {
-        return service.findByRole(role);
-    }
-
-    @PutMapping("/utilisateur/update")
-    public Utilisateur update(@RequestBody Utilisateur utilisateur)
-    {
-        service.addOrUpdateUser(utilisateur);
-        return utilisateur;
-    }
-    @PostMapping("/utilisateur/add")
-    public Utilisateur add(@RequestBody Utilisateur utilisateur)
-    {
-        service.addOrUpdateUser(utilisateur);
-        return utilisateur;
-    }
-    @DeleteMapping("/utilisateur/delete/{id}")
-    public String delete(@PathVariable int id)
-        {
-            service.deleteUtilisateur(id);
-            return "delete with succes";
-        }
 }

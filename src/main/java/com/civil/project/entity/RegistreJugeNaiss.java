@@ -21,23 +21,8 @@ public class RegistreJugeNaiss {
     @Column(name="date_edition")
     private  String edition;
 
-    @Column(name = "tribunal_ar")
-    private String tribunalAr;
-
-    @Column(name = "tribunal_fr")
-    private String tribunalFr;
-
-    @Column(name = "region_fr")
-    private String regionFr;
-
-    @Column(name = "ville_fr")
-    private String villeFr;
-
-    @Column(name = "region_ar")
-    private String regionAr;
-
-    @Column(name = "ville_ar")
-    private String villeAr;
+    @Column(name = "tribunal")
+    private String tribunal;
 
     @Column(name = "annee")
     private int annee;

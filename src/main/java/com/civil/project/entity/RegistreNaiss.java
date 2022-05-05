@@ -29,15 +29,19 @@ public class RegistreNaiss {
     @Column(name = "annee")
     private int annee;
 
+
+
     @Column(name = "premier_numero")
     private int premierNumero;
 
     @Column(name = "dernier_numero")
     private int dernierNumero;
 
+
     @Column(name = "nombre_actes")
     private int nombreActes;
-
+  
+    @Column(name = "date_edition")
     private Date dateEdition;
 
     @Column(name="partie")

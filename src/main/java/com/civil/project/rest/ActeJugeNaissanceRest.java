@@ -1,8 +1,7 @@
 package com.civil.project.rest;
 
 import com.civil.project.entity.ActeJugeNaissancee;
-import com.civil.project.service.ActeJugeNaissance;
-import com.civil.project.service.MarginaleArJugeNaissance;
+import com.civil.project.service.ActeJugeNaissanceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ActeJugeNaissanceRest {
 
-    private final ActeJugeNaissance jugeNaissance;
+    private final ActeJugeNaissanceService jugeNaissance;
 
 
 /////////////////////////////Partie Acte de juge de naissance
@@ -27,7 +26,7 @@ public class ActeJugeNaissanceRest {
 
     //modifier acte de juge de naissance
     @PutMapping("/acte/juge/naissance/update")
-    public String update(@RequestBody ActeJugeNaissance acteJugeNaissancee){
+    public String update(@RequestBody ActeJugeNaissancee acteJugeNaissancee){
         jugeNaissance.AjouterOuModifierActeJugNaissa((ActeJugeNaissancee) acteJugeNaissancee);
         return "acte de juge de naissance est bien modifie";
     }

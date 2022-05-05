@@ -5,7 +5,7 @@ import com.civil.project.entity.MargJugeNaissFr;
 
 import java.util.List;
 
-public interface MarginaleArJugeNaissance {
+public interface MarginaleArJugeNaissanceService {
 
 /////////////////////////////Partie Marginale Arabe de juge de naissance
     void AjouterOuModifierMargAr(MargJugeNaissAr margJugeNaissAr);

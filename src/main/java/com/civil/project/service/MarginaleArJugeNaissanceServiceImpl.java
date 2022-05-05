@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class MarginaleArJugeNaissanceImpl implements MarginaleArJugeNaissance {
+public class MarginaleArJugeNaissanceServiceImpl implements MarginaleArJugeNaissanceService {
     private final JugeNaissanceMargArRep jugeNaissanceMargArRep;
 
     /////////////////////////////Partie Marginale Arabe de juge de naissance

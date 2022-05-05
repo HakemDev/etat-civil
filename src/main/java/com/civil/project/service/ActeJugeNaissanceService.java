@@ -5,7 +5,7 @@ import com.civil.project.entity.ActeJugeNaissancee;
 
 import java.util.List;
 
-public interface ActeJugeNaissance {
+public interface ActeJugeNaissanceService {
 
     void AjouterOuModifierActeJugNaissa(ActeJugeNaissancee acteJugeNaissance);
 

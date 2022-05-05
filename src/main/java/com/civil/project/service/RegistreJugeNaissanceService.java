@@ -4,7 +4,7 @@ import com.civil.project.entity.RegistreJugeNaiss;
 
 import java.util.List;
 
-public interface RegistreJugeNaissance {
+public interface RegistreJugeNaissanceService {
     //////////////////////////////Partie Registre de juge de naissance
     List<RegistreJugeNaiss> findRegistres();
     List<RegistreJugeNaiss> findByDate(int date);

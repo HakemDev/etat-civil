@@ -31,9 +31,10 @@ public class RegistreNaiss {
     @Column(name = "annee")
     private int annee;
 
+    @Column(name = "date_edition")
     private Date dateEdition;
 
-    @Column(name="partie")
+    @Column(name = "partie")
     private int partie;
 
     public int getNombreActes() {

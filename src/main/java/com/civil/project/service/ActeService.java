@@ -6,7 +6,7 @@ import com.civil.project.entity.ActeNaissance;
 import java.util.Collection;
 
 
-public interface User2_ActeService {
+public interface ActeService {
 
     ActeNaissance addActe(ActeNaissance acteNaissance);
 
@@ -15,6 +15,8 @@ public interface User2_ActeService {
     void deleteActe(Integer idActe);
 
     Collection<ActeNaissance> findActes(String nomAr, String nomFr, String numero);
+
+    ActeNaissance findActeById(Integer idActe);
 
 }
 

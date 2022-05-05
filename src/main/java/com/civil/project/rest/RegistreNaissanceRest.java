@@ -1,7 +1,7 @@
 package com.civil.project.rest;
 
 import com.civil.project.entity.RegistreNaiss;
-import com.civil.project.service.User3_Service;
+import com.civil.project.service.RegistreNaissService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,14 +15,13 @@ import java.util.List;
 @CrossOrigin
 public class RegistreNaissanceRest {
 
-    private final User3_Service service;
+    private final RegistreNaissService service;
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public RegistreNaiss addRegistre(@RequestBody RegistreNaiss registre)
     {
-        service.addOrUpdateRegistre(registre);
-        return registre;
+        return service.addRegistre(registre);
     }
 
 

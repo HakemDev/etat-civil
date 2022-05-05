@@ -43,6 +43,9 @@ public class RegistreNaiss {
     @Column(name = "partie")
     private int partie;
 
+    @Column(name = "nombre_actes")
+    private int nombreActes;
+
     public int getNombreActes() {
         return actes == null ? 0 : actes.size();
     }

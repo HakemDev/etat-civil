@@ -26,7 +26,7 @@ public class RegistreJugeNaiss {
 
     @Column(name = "annee")
     private int annee;
-
+//haaa
     @Column(name="partie")
     private int partie;
 

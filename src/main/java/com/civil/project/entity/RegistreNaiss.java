@@ -30,7 +30,6 @@ public class RegistreNaiss {
     private int annee;
 
 
-
     @Column(name = "premier_numero")
     private int premierNumero;
 

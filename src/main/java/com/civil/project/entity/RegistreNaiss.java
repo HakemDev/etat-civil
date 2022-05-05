@@ -39,7 +39,7 @@ public class RegistreNaiss {
 
     @Column(name = "dernier_numero")
     private int dernierNumero;
-    
+
     @Column(name = "partie")
     private int partie;
 

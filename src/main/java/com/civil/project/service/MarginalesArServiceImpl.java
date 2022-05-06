@@ -64,6 +64,10 @@ public class MarginalesArServiceImpl implements MarginalesArService {
         return repository.findAll();
     }
 
+    @Override
+    public void deleteMarg(int id) {
+        repository.deleteById(id);
+    }
 
     @Override
     public MargNaisAr findMargNaisById(Integer id) {

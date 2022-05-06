@@ -37,11 +37,27 @@ public class MarginalesArServiceImpl implements MarginalesArService {
     public List<MargNaisAr> findMargNaisArByIdActe(Integer idActe) {
         List<MargNaisAr> margNais = repository.findByActeNaissanceIdNaissance(idActe);
         if(margNais == null)
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Acte non trouve");
 
         return margNais;
     }
 
+    @Override
+    public MargNaisAr updateMarg(MargNaisAr margNaisAr) {
+
+        Optional<MargNaisAr> byId = repository.findById(margNaisAr.getIdMarginalAr());
+        if(!byId.isPresent())
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,"Marginale non trouvee");
+
+        if(margNaisAr.getMarginaleTxtAr().trim().isEmpty()){
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,"Le texte ne peut pas etre vide");
+        }
+        MargNaisAr toUpdate = byId.get();
+        toUpdate.setMarginaleTxtAr(margNaisAr.getMarginaleTxtAr());
+        return repository.save(toUpdate);
+    }
 
     @Override
     public List<MargNaisAr> findAllMargNaisAr() {

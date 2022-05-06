@@ -1,6 +1,7 @@
 package com.civil.project.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,6 +20,7 @@ public class MargNaisAr {
 
     @JoinColumn(name = "id_acte_nais")
     @ManyToOne
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private ActeNaissance acteNaissance;
 
     @Column(name = "marginale_txt_ar")

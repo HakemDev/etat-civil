@@ -35,4 +35,11 @@ public class MarginalesArRest {
         }
     }
 
+    @PutMapping("")
+    public MargNaisAr updateMarginaleAr(@RequestBody MargNaisAr margNaisAr) {
+        return service.updateMarg(margNaisAr);
+    }
+
+
+
 }

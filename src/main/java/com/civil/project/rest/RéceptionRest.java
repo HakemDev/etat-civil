@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/reception")
 @RequiredArgsConstructor
+@CrossOrigin
 public class RéceptionRest {
 
     private final ReceptionService receptionService;
@@ -29,8 +30,8 @@ public class RéceptionRest {
     }
 
     //AFFICHER LES NOMBRE DES ACTES POR CHAQUE ANNEE
-    @GetMapping("/nombre/acte/annee")
-    public List<Reception> NombreActesAnne(){
-        return receptionService.NombreActeAnnee();
+    @GetMapping("/nombre/acte/{annee}")
+    public List<Reception> NombreActesAnne(@PathVariable int annee){
+        return receptionService.NombreActeAnnee(annee);
     }
 }

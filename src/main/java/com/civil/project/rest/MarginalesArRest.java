@@ -23,8 +23,8 @@ public class MarginalesArRest {
         return service.addMarg(margNaisAr);
     }
 
-    @GetMapping("/{idActe}")
-    public List<MargNaisAr> getMarginalesAr(@PathVariable(required = false) String idActe){
+    @GetMapping("")
+    public List<MargNaisAr> getMarginalesAr(@RequestParam(required = false) String idActe){
         try {
             if(idActe == null)
                 return service.findAllMargNaisAr();

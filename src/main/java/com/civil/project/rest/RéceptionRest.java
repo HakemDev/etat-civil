@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/reception")
 @RequiredArgsConstructor
-public class RéceptionRest {
+public class ReceptionRest {
 
     private final ReceptionService receptionService;
 /////////////////////////////Partie Reception

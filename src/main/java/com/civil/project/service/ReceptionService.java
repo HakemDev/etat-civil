@@ -7,7 +7,7 @@ import java.util.List;
 public interface ReceptionService {
 
     Reception PourcentagActeGlobal();
-    Reception NombregActeGlobal();
+    Reception NombregActePourcentageGlobal();
     List<Reception> NombreActeAnnee();
 
 }

@@ -2,9 +2,11 @@ package com.civil.project.service;
 
 import com.civil.project.dao.UtilisateurRep_user3;
 import com.civil.project.entity.Utilisateur;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class UtilisateurServiceImpl implements UtilisateurService{
 
     private UtilisateurRep_user3 utlRep;

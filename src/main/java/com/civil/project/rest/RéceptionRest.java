@@ -16,10 +16,10 @@ public class ReceptionRest {
     private final ReceptionService receptionService;
 /////////////////////////////Partie Reception
 
-    //AFFICHER LE NOMBRE DE CHAQUE ACTE
-    @GetMapping("/nombre/actes/global")
-    public Reception NombreActe(){
-        return receptionService.NombregActeGlobal();
+     //AFFICHER LE NOMBRE DE CHAQUE ACTE
+    @GetMapping("/nombre/actes_pourcentage/global")
+    public Reception NombreActePourcentage(){
+        return receptionService.NombregActePourcentageGlobal();
     }
 
     //AFFICHER LE POURCENTAGE DE CHAQUE ACTE

@@ -39,20 +39,36 @@ public class ReceptionServiceImpl implements ReceptionService{
     }
 
     @Override
-    public Reception NombregActeGlobal() {
-        int NbrActeJugeNaissance=jugeNaissanceActeRep.findAll().size();
-        int NbrActeNaissance= naissanceActeRepUser2.findAll().size();
+    public Reception NombregActePourcentageGlobal() {
 
-        Reception nbrActes=new Reception();
 
-        nbrActes.setNbrActedejugeNaissance(NbrActeJugeNaissance);
-        nbrActes.setNbrActeDeNaissance(NbrActeNaissance);
-        /*
-        nbrActes.setNbrActeDeces(1);
-        nbrActes.setNbrActeJugeDeces(1);
-         */
+        Reception reception=new Reception();
 
-        return nbrActes;
+        //partie: nombre actes
+        int NbrActeJugeNaissance= jugeNaissanceActeRep.findAll().size();
+        int NbrActeNaissance=naissanceActeRepUser2.findAll().size();
+        int NbrActeDeces=0;
+        int NbreActeJugeDeces=0;
+
+        //partie: pourcentage actes
+        int NbrTotal=NbrActeDeces+NbreActeJugeDeces+NbrActeNaissance+NbrActeJugeNaissance;
+
+        float PourcentageActeNaissance= ((float)NbrActeNaissance*100)/NbrTotal;
+        float PourcentageActeJugeNaissance=((float) NbrActeJugeNaissance*100)/NbrTotal;
+        float PourcentageActeDeces=( (float) NbrActeDeces*100)/NbrTotal;
+        float PourcentageActeJugeDeces=( (float) NbreActeJugeDeces*100)/NbrTotal;
+
+        //Partie: insertion de resultat
+        reception.setPourcentageActedejugeNaissance(PourcentageActeJugeNaissance);
+        reception.setPourcentageActeDeNaissance(PourcentageActeNaissance);
+        reception.setPourcentageActeDeces(PourcentageActeDeces);
+        reception.setPourcentageActeJugeDeces(PourcentageActeJugeDeces);
+
+        reception.setNbrActeDeNaissance(NbrActeNaissance);
+        reception.setNbrActedejugeNaissance(NbrActeJugeNaissance);
+        reception.setNbrActeDeces(NbrActeDeces);
+        reception.setNbrActeJugeDeces(NbreActeJugeDeces);
+        return reception;
     }
 
     @Override

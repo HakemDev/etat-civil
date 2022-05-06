@@ -95,8 +95,11 @@ public class ActeJugeNaissancee {
     @Column(name = "prenom_pere_fr")
     private String prenomPereFr;
 
-    @Column(name = "lieu_naissance_pere")
-    private String lieuNaissancePere;
+    @Column(name = "lieu_naissance_pere_ar")
+    private String lieuNaissancePereAr;
+
+    @Column(name = "lieu_naissance_pere_fr")
+    private String lieuNaissancePereFr;
 
     @Column(name = "nationalite_pere_ar")
     private String nationalitePereAr;
@@ -143,8 +146,11 @@ public class ActeJugeNaissancee {
     @Column(name = "annee_naissance_mere")
     private int anneeNaissanceMere;
 
-    @Column(name = "lieu_naissance_mere")
-    private String lieuNaissanceMere;
+    @Column(name = "lieu_naissance_mere_ar")
+    private String lieuNaissanceMereAr;
+
+    @Column(name = "lieu_naissance_mere_fr")
+    private String lieuNaissanceMereFr;
 
     @Column(name = "profession_mere_ar")
     private String professionMereAr;
@@ -233,6 +239,33 @@ public class ActeJugeNaissancee {
 
     @Column(name = "date_affichage")
     private String date_affichage;
+
+    @Column(name="acte_ar")
+    private String acteAr;
+
+    @Column(name="acte_fr")
+    private String acteFr;
+
+    @Column(name="extrait_ar")
+    private String extraitAr;
+
+    @Column(name="extrait_fr")
+    private String extraitFr;
+
+    @Column(name="lieu_naissance_parents_ar")
+    private String lieuNaissanceParentsAr;
+
+    @Column(name="lieu_naissance_parents_fr")
+    private String lieuNaissanceParentsFr;
+
+    @Column(name="mere_defunte")
+    private boolean mereDefunte;
+
+    @Column(name="pere_defunt")
+    private boolean pereDefunt;
+
+    @Column(name="jumeaux")
+    private boolean jumeaux;
 
     @OneToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH,CascadeType.PERSIST,

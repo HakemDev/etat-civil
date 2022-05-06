@@ -39,8 +39,8 @@ public class ActeJugeNaissanceRest {
 
     //supprimer acte de juge de naissance
     @DeleteMapping("/acte/juge/naissance/delete/{id}")
-    public String deleteMarg_ar(@PathVariable int idActeJugeNais){
-        jugeNaissance.SupprimerActeJugeNaiss(idActeJugeNais);
+    public String deleteActeJuge(@PathVariable int id){
+        jugeNaissance.SupprimerActeJugeNaiss(id);
         return "deleted successfuly";
     }
 

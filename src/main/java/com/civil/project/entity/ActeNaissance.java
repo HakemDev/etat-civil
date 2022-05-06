@@ -203,7 +203,7 @@ public class ActeNaissance {
     @Column(name="pere_defunt")
     private boolean pereDefunt;
 
-    @Column(name="jumaux")
+    @Column(name="jumeaux")
     private boolean jumeaux;
 
     @Column(name="acte_ar")

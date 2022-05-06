@@ -6,17 +6,16 @@ import com.civil.project.entity.RegistreNaiss;
 import java.util.List;
 
 public interface RegistreNaissService {
-    public ActeNaissance findById(int idActe);
 
-    public List<RegistreNaiss> findByDate(String date);
+    List<RegistreNaiss> findByDate(String date);
 
-    public List<RegistreNaiss> findRegistres();
+    List<RegistreNaiss> findRegistres();
 
-    public RegistreNaiss findByIdRegistre(int idRegistre);
+    RegistreNaiss findByIdRegistre(int idRegistre);
 
-    public void deleteRegistre(int id);
+    void deleteRegistre(int id);
 
-    public RegistreNaiss addRegistre(RegistreNaiss registre);
+    RegistreNaiss addRegistre(RegistreNaiss registre);
 
     List<RegistreNaiss> findByAnnee(int annee);
 

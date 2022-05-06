@@ -1,6 +1,6 @@
 package com.civil.project.service;
 
-import com.civil.project.dao.NaissanceActeRep_user2;
+import com.civil.project.dao.NaissanceActeRepository;
 import com.civil.project.dao.NaissanceRegistreRep_user3;
 import com.civil.project.entity.ActeNaissance;
 import com.civil.project.entity.RegistreNaiss;
@@ -20,23 +20,7 @@ import java.util.Optional;
 public class RegistreNaissServiceImpl implements RegistreNaissService {
 
     private final NaissanceRegistreRep_user3 registreRepository;
-    private final NaissanceActeRep_user2 acteRep;
-
-    @Override
-    public ActeNaissance findById(int idActe) {
-        Optional<ActeNaissance> resultat=acteRep.findById(idActe);
-        ActeNaissance acte=null;
-        if(resultat.isPresent())
-        {
-            acte=resultat.get();
-
-        }
-        else
-        {
-            throw new RuntimeException("acte non trouve ");
-        }
-        return acte;
-    }
+    private final NaissanceActeRepository acteRep;
 
     @Override
     public List<RegistreNaiss> findByDate(String date) {
@@ -94,7 +78,7 @@ public class RegistreNaissServiceImpl implements RegistreNaissService {
             if(dernier == null) {
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                         String.format("Le registre %d/%d ne peut pas etre cree avant le registre %d/%d",
-                                registre.getPartie(),registre.getAnnee(),dernier.getPartie(),dernier.getAnnee()));
+                                registre.getPartie(),registre.getAnnee(),registre.getPartie()-1,registre.getAnnee()));
 
             }
         }

@@ -1,6 +1,6 @@
 package com.civil.project.service;
 
-import com.civil.project.dao.NaissanceActeRep_user2;
+import com.civil.project.dao.NaissanceActeRepository;
 import com.civil.project.dao.NaissanceRegistreRep_user3;
 import com.civil.project.entity.ActeNaissance;
 import com.civil.project.entity.RegistreNaiss;
@@ -15,7 +15,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class ActeServiceImpl implements ActeService {
 
-    private final NaissanceActeRep_user2 repo;
+    private final NaissanceActeRepository repo;
 
     private final NaissanceRegistreRep_user3 registreRepo;
 

@@ -197,19 +197,19 @@ public class ActeNaissance {
     @Column(name = "type_declaration_fr")
     private String typeDeclarationFr;
 
-    @Column
+    @Column(name="mere_defunte")
     private boolean mereDefunte;
 
-    @Column
+    @Column(name="pere_defunt")
     private boolean pereDefunt;
 
-    @Column
+    @Column(name="jumaux")
     private boolean jumeaux;
 
-    @Column
+    @Column(name="acte_ar")
     private String acteAr;
 
-    @Column
+    @Column(name="acte_fr")
     private String acteFr;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH,CascadeType.PERSIST,

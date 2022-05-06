@@ -15,29 +15,15 @@ public class RegistreJugeNaiss {
     @Id
     @Column(name = "id_registre")
     private int idRegistre;
+  
     @Column(name = "id_utilisateur")
     private int idUtilisateur;
 
     @Column(name="date_edition")
     private  String edition;
 
-    @Column(name = "tribunal_ar")
-    private String tribunalAr;
-
-    @Column(name = "tribunal_fr")
-    private String tribunalFr;
-
-    @Column(name = "region_fr")
-    private String regionFr;
-
-    @Column(name = "ville_fr")
-    private String villeFr;
-
-    @Column(name = "region_ar")
-    private String regionAr;
-
-    @Column(name = "ville_ar")
-    private String villeAr;
+    @Column(name = "tribunal")
+    private String tribunal;
 
     @Column(name = "annee")
     private int annee;
@@ -45,6 +31,17 @@ public class RegistreJugeNaiss {
     @Column(name="partie")
     private int partie;
 
+    @Column(name = "dernier_numero")
+    private int dernierNumero;
+
+
+    @Column(name = "nombre_actes")
+    private int nombreActes;
+
+    @Column(name = "premier_numero")
+    private int premierNumero;
+
+    
     @OneToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH,CascadeType.PERSIST,
                     CascadeType.MERGE,CascadeType.REFRESH})

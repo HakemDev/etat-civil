@@ -11,19 +11,17 @@ import javax.persistence.*;
 
 @Entity
 @Table(name ="marginale_nais_fr" )
-@JsonIgnoreType
-@JsonIgnoreProperties
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class MargNaisFr {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_marg_fr")
     private int id_marg_fr;
 
-    @Column(name = "id_acte_nais")
-    private int idActeNais;
+    @JoinColumn(name = "id_acte_nais")
+    @ManyToOne
+    private ActeNaissance acteNaissance;
 
     @Column(name = "marginale_txt_fr")
     private String marginaleTxtFr;

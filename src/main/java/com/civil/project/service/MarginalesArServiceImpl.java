@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,4 +33,24 @@ public class MarginalesArServiceImpl implements MarginalesArService {
         return repository.save(margNaisAr);
     }
 
+    @Override
+    public List<MargNaisAr> findMargNaisArByIdActe(Integer idActe) {
+        List<MargNaisAr> margNais = repository.findByActeNaissanceIdNaissance(idActe);
+        if(margNais == null)
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+
+        return margNais;
+    }
+
+
+    @Override
+    public List<MargNaisAr> findAllMargNaisAr() {
+        return repository.findAll();
+    }
+
+
+    @Override
+    public MargNaisAr findMargNaisById(Integer id) {
+        return null;
+    }
 }

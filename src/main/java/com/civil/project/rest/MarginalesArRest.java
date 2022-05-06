@@ -5,6 +5,9 @@ import com.civil.project.service.MarginalesArService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/marginales-ar")
@@ -20,6 +23,16 @@ public class MarginalesArRest {
         return service.addMarg(margNaisAr);
     }
 
+    @GetMapping("/{idActe}")
+    public List<MargNaisAr> getMarginalesAr(@PathVariable(required = false) String idActe){
+        try {
+            if(idActe == null)
+                return service.findAllMargNaisAr();
 
+            return service.findMargNaisArByIdActe(Integer.parseInt(idActe));
+        } catch (NumberFormatException e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Identificateur invalide.");
+        }
+    }
 
 }

@@ -11,15 +11,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/reception")
 @RequiredArgsConstructor
-public class RéceptionRest {
+public class ReceptionRest {
 
     private final ReceptionService receptionService;
 /////////////////////////////Partie Reception
 
     //AFFICHER LE NOMBRE DE CHAQUE ACTE
-    @GetMapping("/nombre/actes/global")
-    public Reception NombreActe(){
-        return receptionService.NombregActeGlobal();
+    @GetMapping("/nombre/actes_pourcentage/global")
+    public Reception NombreActePourcentage(){
+        return receptionService.NombregActePourcentageGlobal();
     }
 
     //AFFICHER LE POURCENTAGE DE CHAQUE ACTE

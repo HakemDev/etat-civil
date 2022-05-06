@@ -15,7 +15,7 @@ public class ReceptionRest {
 
     private final ReceptionService receptionService;
 /////////////////////////////Partie Reception
-
+//
     //AFFICHER LE NOMBRE DE CHAQUE ACTE
     @GetMapping("/nombre/actes_pourcentage/global")
     public Reception NombreActePourcentage(){

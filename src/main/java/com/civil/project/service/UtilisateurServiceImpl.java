@@ -2,6 +2,7 @@ package com.civil.project.service;
 
 import com.civil.project.dao.UtilisateurRep_user3;
 import com.civil.project.entity.Utilisateur;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 @Service
 public class UtilisateurServiceImpl implements UtilisateurService{
 
+    @Autowired
     private UtilisateurRep_user3 utlRep;
 
     ///chercher tous les utilisateur

@@ -34,13 +34,16 @@ public class ActeServiceImpl implements ActeService {
                             acteNaissance.getRegistre().getPartie()));
         }
 
-        for(ActeNaissance acte : registreNaiss.getActes()) {
-            if(acteNaissance.getNumeroActe() == acte.getNumeroActe()){
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                        String.format("L'acte numero %d dans le registre %d/%d existe deja",
-                                acteNaissance.getNumeroActe(),
-                                acteNaissance.getRegistre().getAnnee(),
-                                acteNaissance.getRegistre().getPartie()));
+        if(acteNaissance.getNumeroActe() == 0) {
+            // if not updating
+            for(ActeNaissance acte : registreNaiss.getActes()) {
+                if(acteNaissance.getNumeroActe() == acte.getNumeroActe()){
+                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                            String.format("L'acte numero %d dans le registre %d/%d existe deja",
+                                    acteNaissance.getNumeroActe(),
+                                    acteNaissance.getRegistre().getAnnee(),
+                                    acteNaissance.getRegistre().getPartie()));
+                }
             }
         }
 

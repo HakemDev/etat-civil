@@ -1,7 +1,7 @@
 package com.civil.project.service;
 
-import com.civil.project.dao.Naissance_Marg_ar_Rep_user1;
-import com.civil.project.dao.Naissance_Marg_fr_Rep_user1;
+import com.civil.project.dao.MargNaissArRepository;
+import com.civil.project.dao.MargNaissFrRepository;
 import com.civil.project.entity.MargNaisAr;
 import com.civil.project.entity.MargNaisFr;
 import lombok.RequiredArgsConstructor;
@@ -15,9 +15,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class User1_ServiceImpl implements User1_Service{
 
-    private final Naissance_Marg_ar_Rep_user1 marg_ar_rep;
+    private final MargNaissArRepository marg_ar_rep;
 
-    private final Naissance_Marg_fr_Rep_user1 marg_fr_rep;
+    private final MargNaissFrRepository marg_fr_rep;
 
     @Override
     public void saveOrUpdate_marginale_fr(MargNaisFr marginale_fr) {
@@ -39,7 +39,7 @@ public class User1_ServiceImpl implements User1_Service{
 
     @Override
     public List<MargNaisFr> getById_acte_nais_Marg_fr(int id) {
-        return marg_fr_rep.findByIdActeNais(id);
+        return marg_fr_rep.findByActeNaissanceIdNaissance(id);
     }
 
     @Override
@@ -60,6 +60,6 @@ public class User1_ServiceImpl implements User1_Service{
 
     @Override
     public List<MargNaisAr> getById_acte_nais_Marg_ar(int id) {
-        return marg_ar_rep.findByIdActeNais(id);
+        return marg_ar_rep.findByActeNaissanceIdNaissance(id);
     }
 }

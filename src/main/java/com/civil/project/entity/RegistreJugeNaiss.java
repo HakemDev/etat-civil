@@ -15,6 +15,7 @@ public class RegistreJugeNaiss {
     @Id
     @Column(name = "id_registre")
     private int idRegistre;
+  
     @Column(name = "id_utilisateur")
     private int idUtilisateur;
 
@@ -30,14 +31,18 @@ public class RegistreJugeNaiss {
     @Column(name="partie")
     private int partie;
 
-    @Column(name = "premier_numero")
-    private int premierNumero;
-
     @Column(name = "dernier_numero")
     private int dernierNumero;
 
+
     @Column(name = "nombre_actes")
     private int nombreActes;
+
+
+    @Column(name = "premier_numero")
+    private int premierNumero;
+
+    
 
     @OneToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH,CascadeType.PERSIST,

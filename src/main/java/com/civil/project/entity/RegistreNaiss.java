@@ -48,7 +48,7 @@ public class RegistreNaiss {
 
     @OneToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH,CascadeType.PERSIST,
-                    CascadeType.MERGE,CascadeType.REFRESH})
+                    CascadeType.MERGE,CascadeType.REFRESH, CascadeType.ALL})
     @JoinColumn(name="id_registre")
     @JsonIgnore
     private List<ActeNaissance> actes;

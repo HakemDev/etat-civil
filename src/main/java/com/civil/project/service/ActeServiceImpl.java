@@ -34,7 +34,7 @@ public class ActeServiceImpl implements ActeService {
                             acteNaissance.getRegistre().getPartie()));
         }
 
-        if(acteNaissance.getNumeroActe() == 0) {
+        if(acteNaissance.getIdNaissance() == 0) {
             // if not updating
             for(ActeNaissance acte : registreNaiss.getActes()) {
                 if(acteNaissance.getNumeroActe() == acte.getNumeroActe()){

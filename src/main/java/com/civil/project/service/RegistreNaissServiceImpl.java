@@ -1,8 +1,7 @@
 package com.civil.project.service;
 
 import com.civil.project.dao.NaissanceActeRepository;
-import com.civil.project.dao.NaissanceRegistreRep_user3;
-import com.civil.project.entity.ActeNaissance;
+import com.civil.project.dao.RegistreNaissanceRepository;
 import com.civil.project.entity.RegistreNaiss;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,7 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class RegistreNaissServiceImpl implements RegistreNaissService {
 
-    private final NaissanceRegistreRep_user3 registreRepository;
+    private final RegistreNaissanceRepository registreRepository;
     private final NaissanceActeRepository acteRep;
 
     @Override

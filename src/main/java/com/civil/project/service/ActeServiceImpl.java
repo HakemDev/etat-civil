@@ -1,7 +1,7 @@
 package com.civil.project.service;
 
 import com.civil.project.dao.NaissanceActeRepository;
-import com.civil.project.dao.NaissanceRegistreRep_user3;
+import com.civil.project.dao.RegistreNaissanceRepository;
 import com.civil.project.entity.ActeNaissance;
 import com.civil.project.entity.RegistreNaiss;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ public class ActeServiceImpl implements ActeService {
 
     private final NaissanceActeRepository repo;
 
-    private final NaissanceRegistreRep_user3 registreRepo;
+    private final RegistreNaissanceRepository registreRepo;
 
     @Override
     public ActeNaissance addActe(ActeNaissance acteNaissance) {

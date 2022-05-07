@@ -24,6 +24,13 @@ public class RegistreNaissanceRest {
         return service.addRegistre(registre);
     }
 
+    @PutMapping("")
+    @ResponseStatus(HttpStatus.CREATED)
+    public RegistreNaiss updateRegistre(@RequestBody RegistreNaiss registre)
+    {
+        return service.updateRegistre(registre);
+    }
+
 
     @GetMapping("")
     public List<RegistreNaiss> findRegistres(@RequestParam(required = false) Integer annee ){

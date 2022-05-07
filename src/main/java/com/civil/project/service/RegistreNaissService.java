@@ -17,6 +17,8 @@ public interface RegistreNaissService {
 
     RegistreNaiss addRegistre(RegistreNaiss registre);
 
+    RegistreNaiss updateRegistre(RegistreNaiss registre);
+
     List<RegistreNaiss> findByAnnee(int annee);
 
     RegistreNaiss findRegistreNaissByAnneeAndPartie(Integer annee,Integer partie);

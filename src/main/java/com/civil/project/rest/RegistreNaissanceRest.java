@@ -47,6 +47,18 @@ public class RegistreNaissanceRest {
         }
     }
 
+    @DeleteMapping ("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteRegistreNaissance(@PathVariable String id) {
+        try {
+            service.deleteRegistre(Integer.parseInt(id));
+
+        } catch (NumberFormatException e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Identificateur invalide.");
+        }
+
+    }
+
 
 
 }

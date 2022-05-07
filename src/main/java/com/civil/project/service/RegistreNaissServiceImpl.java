@@ -61,7 +61,10 @@ public class RegistreNaissServiceImpl implements RegistreNaissService {
 
     @Override
     public void deleteRegistre(int id) {
-        registreRepository.deleteById(id);
+        Optional<RegistreNaiss> resultat=registreRepository.findById(id);
+        if( !resultat.isPresent())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Registre non trouve");
+        registreRepository.delete(resultat.get());
     }
 
     public RegistreNaiss addRegistre(RegistreNaiss registre) {

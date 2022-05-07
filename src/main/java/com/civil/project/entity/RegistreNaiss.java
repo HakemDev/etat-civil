@@ -46,10 +46,11 @@ public class RegistreNaiss {
     @Column(name="partie")
     private int partie;
 
-    @OneToMany(fetch = FetchType.LAZY,
+    @OneToMany(
+            mappedBy = "registre",
+            fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH,CascadeType.PERSIST,
                     CascadeType.MERGE,CascadeType.REFRESH, CascadeType.ALL})
-    @JoinColumn(name="id_registre")
     @JsonIgnore
     private List<ActeNaissance> actes;
 

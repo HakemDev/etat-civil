@@ -2,7 +2,6 @@ package com.civil.project.jugesDeces;
 
 import com.civil.project.dao.JugeDecesRepository;
 import com.civil.project.dao.RegistreJugeDecesRepository;
-import com.civil.project.entity.ActeNaissance;
 import com.civil.project.entity.JugeDeces;
 import com.civil.project.entity.RegistreJugesDeces;
 import lombok.RequiredArgsConstructor;
@@ -49,7 +48,8 @@ public class JugesDecesServiceImpl implements JugesDecesService{
 
         registreJuge.setNombreJuges(registreJuge.getNombreJuges()+1);
         registreJuge.setDernierNumero(jugeDeces.getNumJugeDeces());
-        jugeDeces.setRegistreJugesDeces(registreJuge);
+        if(jugeDeces.getRegistreJugesDeces().getIdRegistreDeces() == 0)
+            jugeDeces.setRegistreJugesDeces(registreJuge);
         return repo.save(jugeDeces);
     }
 

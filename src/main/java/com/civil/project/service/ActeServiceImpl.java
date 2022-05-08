@@ -1,5 +1,7 @@
 package com.civil.project.service;
 
+import com.civil.project.dao.MargNaissArRepository;
+import com.civil.project.dao.MargNaissFrRepository;
 import com.civil.project.dao.NaissanceActeRepository;
 import com.civil.project.dao.RegistreNaissanceRepository;
 import com.civil.project.entity.ActeNaissance;
@@ -18,6 +20,10 @@ public class ActeServiceImpl implements ActeService {
     private final NaissanceActeRepository repo;
 
     private final RegistreNaissanceRepository registreRepo;
+
+    private final MargNaissArRepository margNaissArRepository;
+
+    private final MargNaissFrRepository margNaissFrRepository;
 
     @Override
     public ActeNaissance addActe(ActeNaissance acteNaissance) {
@@ -51,8 +57,8 @@ public class ActeServiceImpl implements ActeService {
 
         registreNaiss.setNombreActes(registreNaiss.getNombreActes() + 1);
         registreNaiss.setDernierNumero(acteNaissance.getNumeroActe());
-
-        acteNaissance.setRegistre(registreNaiss);
+        if(acteNaissance.getRegistre().getIdRegistre() == 0)
+            acteNaissance.setRegistre(registreNaiss);
         return repo.save(acteNaissance);
     }
 
@@ -72,6 +78,8 @@ public class ActeServiceImpl implements ActeService {
 
     @Override
     public void deleteActe(Integer idActe) {
+        margNaissArRepository.deleteAll(margNaissArRepository.findByActeNaissanceIdNaissance(idActe));
+        margNaissFrRepository.deleteAll(margNaissFrRepository.findByActeNaissanceIdNaissance(idActe));
         repo.deleteById(idActe);
     }
 

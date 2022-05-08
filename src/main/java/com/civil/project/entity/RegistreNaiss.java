@@ -54,12 +54,17 @@ public class RegistreNaiss {
     @JsonIgnore
     private List<ActeNaissance> actes;
 
-    public void add(ActeNaissance acte)
-    {
-        if(actes==null){
-            actes=new ArrayList<>();
-        }
-        actes.add(acte);
-//    /registre.setUtilisateur(this);
+    @Override
+    public String toString() {
+        return "RegistreNaiss{" +
+                "idRegistre=" + idRegistre +
+                ", tribunal='" + tribunal + '\'' +
+                ", annee=" + annee +
+                ", premierNumero=" + premierNumero +
+                ", dernierNumero=" + dernierNumero +
+                ", nombreActes=" + nombreActes +
+                ", dateEdition=" + dateEdition +
+                ", partie=" + partie +
+                '}';
     }
 }

@@ -223,18 +223,18 @@ public class ActeDeces {
 
 
     @OneToMany(fetch = FetchType.LAZY,
+            mappedBy = "acteDeces",
             cascade = {CascadeType.DETACH,CascadeType.PERSIST,
                     CascadeType.MERGE,CascadeType.REFRESH})
     @Fetch(value = FetchMode.SUBSELECT)
-    @JoinColumn(name="id_deces")
     private List<MarginaleDecesAr> marginaleDecesArs;
 
 
     @OneToMany(fetch = FetchType.LAZY,
+            mappedBy ="acteDeces",
             cascade = {CascadeType.DETACH,CascadeType.PERSIST,
                     CascadeType.MERGE,CascadeType.REFRESH})
     @Fetch(value = FetchMode.SUBSELECT)
-    @JoinColumn(name="id_deces")
     private List<MarginaleDecesFr> marginaleDecesFrs;
 
 

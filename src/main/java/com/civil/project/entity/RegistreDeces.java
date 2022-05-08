@@ -38,6 +38,7 @@ public class RegistreDeces {
             cascade = {CascadeType.DETACH,CascadeType.PERSIST,
                     CascadeType.MERGE,CascadeType.REFRESH})
     @JoinColumn(name="id_registre_deces")
+    // todo remove joincolumn
     private List<ActeDeces> actesDeces;
 
 

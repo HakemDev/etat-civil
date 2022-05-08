@@ -2,7 +2,6 @@ package com.civil.project.rest;
 
 
 
-import com.civil.project.entity.ActeNaissance;
 import com.civil.project.service.ActeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,19 +15,19 @@ import java.util.Collection;
 @RequestMapping("/acte")
 @RequiredArgsConstructor
 @CrossOrigin
-public class User2_Acte {
+public class ActeNaissance {
 
     private final ActeService acteService;
 
     @PostMapping("")
-    public ActeNaissance addActe(@RequestBody ActeNaissance acteNaissance) {
+    public com.civil.project.entity.ActeNaissance addActe(@RequestBody com.civil.project.entity.ActeNaissance acteNaissance) {
 
 
         return acteService.addActe(acteNaissance);
     }
 
     @GetMapping("")
-    public Collection<ActeNaissance> searchActe(
+    public Collection<com.civil.project.entity.ActeNaissance> searchActe(
             @RequestParam(required = false) String nomAr,
             @RequestParam(required = false) String nomFr,
             @RequestParam(required = false) String numero
@@ -37,7 +36,7 @@ public class User2_Acte {
     }
 
     @GetMapping("/{idActe}")
-    public ActeNaissance findActeById(@PathVariable String idActe) {
+    public com.civil.project.entity.ActeNaissance findActeById(@PathVariable String idActe) {
         try {
             return acteService.findActeById(Integer.parseInt(idActe));
         }
@@ -48,7 +47,7 @@ public class User2_Acte {
 
     @PutMapping("")
     @ResponseStatus(HttpStatus.OK)
-    public ActeNaissance updateActe(@RequestBody ActeNaissance acteNaissance) {
+    public com.civil.project.entity.ActeNaissance updateActe(@RequestBody com.civil.project.entity.ActeNaissance acteNaissance) {
        return acteService.updateActe(acteNaissance);
     }
 

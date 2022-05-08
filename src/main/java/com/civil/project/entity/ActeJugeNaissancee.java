@@ -271,6 +271,7 @@ public class ActeJugeNaissancee {
             cascade = {CascadeType.DETACH,CascadeType.PERSIST,
                     CascadeType.MERGE,CascadeType.REFRESH})
     @Fetch(value = FetchMode.SUBSELECT)
+    // todo remove joincolumn
     @JoinColumn(name="id_acte_juge_nais")
     private List<MargJugeNaissAr> margJugeNaissArs;
 

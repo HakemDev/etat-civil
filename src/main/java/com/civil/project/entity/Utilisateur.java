@@ -48,6 +48,7 @@ public class Utilisateur {
             cascade = {CascadeType.DETACH,CascadeType.PERSIST,
                     CascadeType.MERGE,CascadeType.REFRESH})
     @Fetch(value = FetchMode.SUBSELECT)
+    // todo remove joincolumn
     @JoinColumn(name="id_utilisateur")
     private List<RegistreNaiss> registres;
 
@@ -55,6 +56,7 @@ public class Utilisateur {
             cascade = {CascadeType.DETACH,CascadeType.PERSIST,
                     CascadeType.MERGE,CascadeType.REFRESH})
     @Fetch(value = FetchMode.SUBSELECT)
+    // todo remove joincolumn
     @JoinColumn(name="id_utilisateur")
     //@JsonIgnore
     private List<RegistreJugeNaiss> registresjugenaissa;

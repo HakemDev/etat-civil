@@ -27,15 +27,18 @@ public class ActeDeces {
     @Column(name = "cin")
     private String cin;
 
+    // should be a ManyToOne relationship or removed
     @Column(name = "id_officier")
     private int idOfficier;
 
+    // imo a string fih heure:min would be better ou blach mn ar/fr
     @Column(name = "minute_ar")
     private String minuteAr;
 
     @Column(name = "minute_fr")
     private String minuteFr;
 
+    // type Date
     @Column(name = "date_naissance")
     private String dateNaissance;
 

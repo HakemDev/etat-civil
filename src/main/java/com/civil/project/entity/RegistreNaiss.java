@@ -46,19 +46,25 @@ public class RegistreNaiss {
     @Column(name="partie")
     private int partie;
 
-    @OneToMany(fetch = FetchType.LAZY,
+    @OneToMany(
+            mappedBy = "registre",
+            fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH,CascadeType.PERSIST,
-                    CascadeType.MERGE,CascadeType.REFRESH})
-    @JoinColumn(name="id_registre")
+                    CascadeType.MERGE,CascadeType.REFRESH, CascadeType.ALL})
     @JsonIgnore
     private List<ActeNaissance> actes;
 
-    public void add(ActeNaissance acte)
-    {
-        if(actes==null){
-            actes=new ArrayList<>();
-        }
-        actes.add(acte);
-//    /registre.setUtilisateur(this);
+    @Override
+    public String toString() {
+        return "RegistreNaiss{" +
+                "idRegistre=" + idRegistre +
+                ", tribunal='" + tribunal + '\'' +
+                ", annee=" + annee +
+                ", premierNumero=" + premierNumero +
+                ", dernierNumero=" + dernierNumero +
+                ", nombreActes=" + nombreActes +
+                ", dateEdition=" + dateEdition +
+                ", partie=" + partie +
+                '}';
     }
 }

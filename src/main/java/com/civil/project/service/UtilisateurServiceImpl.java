@@ -9,13 +9,14 @@ import java.util.List;
 
 @Service
 public class UtilisateurServiceImpl implements UtilisateurService{
+
     @Autowired
     private UtilisateurRep_user3 utlRep;
 
     ///chercher tous les utilisateur
     @Override
     public List<Utilisateur> findUtilisateur() {
-        System.out.println("heyaaa");
+        System.out.println(utlRep.findAll().get(0).getRegistresjugenaissa());
         return utlRep.findAll();
     }
 
@@ -30,7 +31,6 @@ public class UtilisateurServiceImpl implements UtilisateurService{
     public void addOrUpdateUser(Utilisateur utilisateur) {
         utlRep.save(utilisateur);
     }
-
     ///supprimer un utilisateur
     @Override
     public void deleteUtilisateur(int id) {

@@ -8,6 +8,6 @@ public interface ReceptionService {
 
     Reception PourcentagActeGlobal();
     Reception NombregActePourcentageGlobal();
-    List<Reception> NombreActeAnnee();
+    List<Reception> NombreActeAnnee(int annee);
 
 }

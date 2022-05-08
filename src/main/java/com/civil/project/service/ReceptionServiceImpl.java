@@ -72,8 +72,8 @@ public class ReceptionServiceImpl implements ReceptionService{
     }
 
     @Override
-    public List<Reception> NombreActeAnnee(){
-        int anne=2022;
+    public List<Reception> NombreActeAnnee(int anne){
+
         List<Reception> receptions=new ArrayList<>();
         for(int i=0;i<5;i++){
             int NbrActeJugeNaissance=jugeNaissanceActeRep.findByAnnee(anne-i).size();
@@ -82,7 +82,7 @@ public class ReceptionServiceImpl implements ReceptionService{
             Reception reception=new Reception();
             reception.setNbrActedejugeNaissance(NbrActeJugeNaissance);
             reception.setNbrActeDeNaissance(NbrActeNaissance);
-
+            reception.setAnnee(anne-i);
             receptions.add(reception);
         }
         return receptions;

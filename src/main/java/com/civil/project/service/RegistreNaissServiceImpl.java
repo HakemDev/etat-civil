@@ -1,8 +1,7 @@
 package com.civil.project.service;
 
 import com.civil.project.dao.NaissanceActeRepository;
-import com.civil.project.dao.NaissanceRegistreRep_user3;
-import com.civil.project.entity.ActeNaissance;
+import com.civil.project.dao.RegistreNaissanceRepository;
 import com.civil.project.entity.RegistreNaiss;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,7 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class RegistreNaissServiceImpl implements RegistreNaissService {
 
-    private final NaissanceRegistreRep_user3 registreRepository;
+    private final RegistreNaissanceRepository registreRepository;
     private final NaissanceActeRepository acteRep;
 
     @Override
@@ -44,11 +43,6 @@ public class RegistreNaissServiceImpl implements RegistreNaissService {
         return registreNaissByAnneeAndPartie;
     }
 
-    @Override
-    public ActeNaissance findById(int idActe) {
-        return null;
-    }
-
 
     @Override
     public List<RegistreNaiss> findRegistres() {
@@ -66,22 +60,41 @@ public class RegistreNaissServiceImpl implements RegistreNaissService {
 
     @Override
     public void deleteRegistre(int id) {
-        registreRepository.deleteById(id);
+        Optional<RegistreNaiss> resultat=registreRepository.findById(id);
+        if( !resultat.isPresent())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Registre non trouve");
+        registreRepository.delete(resultat.get());
+    }
+
+    @Override
+    public RegistreNaiss updateRegistre(RegistreNaiss registre) {
+        Optional<RegistreNaiss> resultat=registreRepository.findById(registre.getIdRegistre());
+        if( !resultat.isPresent())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Registre non trouve");
+        return addRegistre(registre);
     }
 
     public RegistreNaiss addRegistre(RegistreNaiss registre) {
 
-        if(registreRepository
-            .findRegistreNaissByAnneeAndPartie(registre.getAnnee(),registre.getPartie()) != null)
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+        RegistreNaiss duplicateTest = registreRepository
+                .findRegistreNaissByAnneeAndPartie(registre.getAnnee(), registre.getPartie());
+
+        if(duplicateTest != null) {
+            if(registre.getIdRegistre() == 0 ||
+            // if inserting new registre no matches should be found
+            (registre.getIdRegistre() != 0  &&
+                    registre.getIdRegistre() != duplicateTest.getIdRegistre() ))
+            // if updating, a match should be found, and it should have the same id
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     String.format("Le registre %d/%d existe deja",registre.getPartie(),registre.getAnnee()));
+        }
 
         if(registre.getPartie() > 1){
             RegistreNaiss dernier =
                     registreRepository.
                     findRegistreNaissByAnneeAndPartie(registre.getAnnee(),registre.getPartie() - 1);
             if(dernier == null) {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                         String.format("Le registre %d/%d ne peut pas etre cree avant le registre %d/%d",
                                 registre.getPartie(),registre.getAnnee(),registre.getPartie()-1,registre.getAnnee()));
 

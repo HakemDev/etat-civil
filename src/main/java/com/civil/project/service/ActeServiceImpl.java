@@ -1,7 +1,9 @@
 package com.civil.project.service;
 
+import com.civil.project.dao.MargNaissArRepository;
+import com.civil.project.dao.MargNaissFrRepository;
 import com.civil.project.dao.NaissanceActeRepository;
-import com.civil.project.dao.NaissanceRegistreRep_user3;
+import com.civil.project.dao.RegistreNaissanceRepository;
 import com.civil.project.entity.ActeNaissance;
 import com.civil.project.entity.RegistreNaiss;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +19,11 @@ public class ActeServiceImpl implements ActeService {
 
     private final NaissanceActeRepository repo;
 
-    private final NaissanceRegistreRep_user3 registreRepo;
+    private final RegistreNaissanceRepository registreRepo;
+
+    private final MargNaissArRepository margNaissArRepository;
+
+    private final MargNaissFrRepository margNaissFrRepository;
 
     @Override
     public ActeNaissance addActe(ActeNaissance acteNaissance) {
@@ -34,20 +40,25 @@ public class ActeServiceImpl implements ActeService {
                             acteNaissance.getRegistre().getPartie()));
         }
 
+
         for(ActeNaissance acte : registreNaiss.getActes()) {
-            if(acteNaissance.getNumeroActe() == acte.getNumeroActe()){
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                        String.format("L'acte numero %d dans le registre %d/%d existe deja",
-                                acteNaissance.getNumeroActe(),
-                                acteNaissance.getRegistre().getAnnee(),
-                                acteNaissance.getRegistre().getPartie()));
+                if(acteNaissance.getNumeroActe() == acte.getNumeroActe()
+                    && acteNaissance.getIdNaissance() != acte.getIdNaissance()
+                ){
+                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                            String.format("L'acte numero %d dans le registre %d/%d existe deja",
+                                    acteNaissance.getNumeroActe(),
+                                    acteNaissance.getRegistre().getAnnee(),
+                                    acteNaissance.getRegistre().getPartie()));
+
             }
         }
 
+
         registreNaiss.setNombreActes(registreNaiss.getNombreActes() + 1);
         registreNaiss.setDernierNumero(acteNaissance.getNumeroActe());
-
-        acteNaissance.setRegistre(registreNaiss);
+        if(acteNaissance.getRegistre().getIdRegistre() == 0)
+            acteNaissance.setRegistre(registreNaiss);
         return repo.save(acteNaissance);
     }
 
@@ -67,6 +78,8 @@ public class ActeServiceImpl implements ActeService {
 
     @Override
     public void deleteActe(Integer idActe) {
+        margNaissArRepository.deleteAll(margNaissArRepository.findByActeNaissanceIdNaissance(idActe));
+        margNaissFrRepository.deleteAll(margNaissFrRepository.findByActeNaissanceIdNaissance(idActe));
         repo.deleteById(idActe);
     }
 

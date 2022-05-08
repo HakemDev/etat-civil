@@ -16,7 +16,7 @@ import java.util.Collection;
 @RequestMapping("/acte")
 @RequiredArgsConstructor
 @CrossOrigin
-public class User2_Acte {
+public class ActeNaissanceRest {
 
     private final ActeService acteService;
 
@@ -50,8 +50,14 @@ public class User2_Acte {
        return acteService.updateActe(acteNaissance);
     }
 
-    public void deleteActe(Integer idActe) {
-        acteService.deleteActe(idActe);
+    @DeleteMapping("/{idActe}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteActe(@PathVariable String idActe) {
+        try {
+            acteService.deleteActe(Integer.parseInt(idActe));
+        } catch (NumberFormatException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Identificateur invalide");
+        }
     }
 }
 

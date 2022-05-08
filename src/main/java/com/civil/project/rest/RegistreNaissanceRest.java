@@ -24,6 +24,13 @@ public class RegistreNaissanceRest {
         return service.addRegistre(registre);
     }
 
+    @PutMapping("")
+    @ResponseStatus(HttpStatus.CREATED)
+    public RegistreNaiss updateRegistre(@RequestBody RegistreNaiss registre)
+    {
+        return service.updateRegistre(registre);
+    }
+
 
     @GetMapping("")
     public List<RegistreNaiss> findRegistres(@RequestParam(required = false) Integer annee ){
@@ -45,6 +52,18 @@ public class RegistreNaissanceRest {
         } catch (NumberFormatException e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Identificateur invalide.");
         }
+    }
+
+    @DeleteMapping ("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteRegistreNaissance(@PathVariable String id) {
+        try {
+            service.deleteRegistre(Integer.parseInt(id));
+
+        } catch (NumberFormatException e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Identificateur invalide.");
+        }
+
     }
 
 

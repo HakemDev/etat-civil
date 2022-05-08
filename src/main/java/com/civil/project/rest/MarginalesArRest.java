@@ -35,4 +35,19 @@ public class MarginalesArRest {
         }
     }
 
+    @PutMapping("")
+    public MargNaisAr updateMarginaleAr(@RequestBody MargNaisAr margNaisAr) {
+        return service.updateMarg(margNaisAr);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteMarg_ar(@PathVariable String id) {
+        try {
+            service.deleteMarg(Integer.parseInt(id));
+        } catch (NumberFormatException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Identificateur invalide.");
+        }
+    }
+
 }

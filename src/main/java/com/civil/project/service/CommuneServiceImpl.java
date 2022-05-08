@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class User2_CommuneServiceImpl implements User2_CommuneService{
+public class CommuneServiceImpl implements CommuneService {
 
     private final CommuneRep_user2 communeRepo;
 

@@ -14,4 +14,8 @@ public interface MarginalesArService {
 
     MargNaisAr findMargNaisById(Integer id);
 
+    MargNaisAr updateMarg(MargNaisAr margNaisAr);
+
+    void deleteMarg(int id);
+
 }

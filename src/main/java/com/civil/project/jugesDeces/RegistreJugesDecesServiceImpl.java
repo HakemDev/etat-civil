@@ -65,8 +65,10 @@ public class RegistreJugesDecesServiceImpl implements RegistreJugesDecesService{
     @Override
     public void deleteRegistre(int id) {
         Optional<RegistreJugesDeces> byId = repository.findById(id);
-        byId.ifPresent(repository::delete);
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Registre juge deces non trouve");
+        if(!byId.isPresent()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Registre juge deces non trouve");
+        }
+        repository.delete(byId.get());
 
     }
 
@@ -76,7 +78,7 @@ public class RegistreJugesDecesServiceImpl implements RegistreJugesDecesService{
                 registreJugesDeces.getIdRegistreDeces()
         );
         if(byId.isPresent()){
-            repository.save(registreJugesDeces);
+            return repository.save(registreJugesDeces);
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Registre juge deces non trouve");
 

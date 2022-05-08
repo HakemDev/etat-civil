@@ -4,8 +4,11 @@ import com.civil.project.dao.JugeNaissanceMargArRep;
 import com.civil.project.dao.JugeNaissanceMargFrRep;
 import com.civil.project.dao.JugeNaissanceRegistreRep;
 import com.civil.project.entity.RegistreJugeNaiss;
+import com.civil.project.entity.RegistreNaiss;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +28,12 @@ public class RegistreJugeNaissanceServiceImpl implements RegistreJugeNaissanceSe
     //rechercher le registre de juge de naissance a partir de l'année
     @Override
     public List<RegistreJugeNaiss> findByDate(int date) {
-        return jugeNaissanceRegistreRep.findByAnnee(date);
+        List<RegistreJugeNaiss>  registreJugeNaisses=jugeNaissanceRegistreRep.findByAnnee(date);
+        if(registreJugeNaisses.isEmpty())
+            {
+
+            }
+        return registreJugeNaisses;
     }
     //afficher le registre de juge de naissance a partir de ID de registre
     @Override
@@ -39,18 +47,40 @@ public class RegistreJugeNaissanceServiceImpl implements RegistreJugeNaissanceSe
             Registres=resultat.get();
         }
         else {
-            throw new RuntimeException("Registre non trouve");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    String.format("Le registre de juge de naissance avec id %d",idRegistre));
         }
         return Registres;
     }
     //supprimrer le registre de juge de naissance a partir de ID du Registre
     @Override
     public void deleteActe(int id) {
-        jugeNaissanceRegistreRep.deleteById(id);
+        if(jugeNaissanceRegistreRep.findById(id).isPresent()){
+            jugeNaissanceRegistreRep.deleteById(id);
+        }else{
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    String.format("Le registre de juge de naissance avec id %d n'existe pas",id));
+        }
     }
     //ajouter ou modifier un registre de juge de naissance
     @Override
     public void addOrUpdateRegistre(RegistreJugeNaiss registre) {
+        if(jugeNaissanceRegistreRep.findRegistreNaissByAnneeAndPartie
+                (registre.getAnnee(),registre.getPartie()) != null)
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    String.format("Le registre de juge de naissance %d/%d existe deja",registre.getPartie(),registre.getAnnee()));
+
+        if(registre.getPartie() > 1){
+            RegistreJugeNaiss dernier =
+                    jugeNaissanceRegistreRep.findRegistreNaissByAnneeAndPartie(registre.getAnnee(),registre.getPartie() - 1);
+            if(dernier == null) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        String.format("Le registre de juge de naissance %d/%d ne peut pas etre cree avant le registre %d/%d",
+                                registre.getPartie(),registre.getAnnee(),registre.getPartie()-1,registre.getAnnee()));
+
+            }
+        }
         jugeNaissanceRegistreRep.save(registre);
+
     }
 }

@@ -22,8 +22,6 @@ public class User2_Acte {
 
     @PostMapping("")
     public ActeNaissance addActe(@RequestBody ActeNaissance acteNaissance) {
-
-
         return acteService.addActe(acteNaissance);
     }
 

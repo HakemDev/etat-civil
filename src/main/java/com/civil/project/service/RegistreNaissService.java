@@ -20,4 +20,6 @@ public interface RegistreNaissService {
     List<RegistreNaiss> findByAnnee(int annee);
 
     RegistreNaiss findRegistreNaissByAnneeAndPartie(Integer annee,Integer partie);
+
+    ActeNaissance findById(int idActe);
 }

@@ -2,6 +2,7 @@ package com.civil.project.entity;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -48,5 +49,6 @@ public class RegistreJugeNaiss {
             cascade = {CascadeType.DETACH,CascadeType.PERSIST,
                     CascadeType.MERGE,CascadeType.REFRESH})
     @JoinColumn(name="id_registre")
+    @JsonIgnore
     private List<ActeJugeNaissancee> actesjugenaissancee;
 }

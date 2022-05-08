@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface JugeNaissanceRegistreRep extends JpaRepository<RegistreJugeNaiss,Integer> {
     List<RegistreJugeNaiss> findByAnnee(int date);
+
+    RegistreJugeNaiss findRegistreNaissByAnneeAndPartie(int parseInt, int parseInt1);
 }

@@ -44,6 +44,11 @@ public class RegistreNaissServiceImpl implements RegistreNaissService {
         return registreNaissByAnneeAndPartie;
     }
 
+    @Override
+    public ActeNaissance findById(int idActe) {
+        return null;
+    }
+
 
     @Override
     public List<RegistreNaiss> findRegistres() {

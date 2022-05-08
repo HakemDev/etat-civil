@@ -1,5 +1,6 @@
 package com.civil.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import lombok.Data;
 
@@ -9,7 +10,6 @@ import java.util.List;
 @Entity
 @Table(name = "registre_juges_deces")
 @Data
-@JsonIgnoreType
 public class RegistreJugesDeces {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,6 +40,8 @@ public class RegistreJugesDeces {
 
     @OneToMany(fetch = FetchType.LAZY,
             cascade = CascadeType.ALL,
-    mappedBy = "registreDeces")
-    private List<ActeDeces> actesDeces;
+    mappedBy = "registreJugesDeces")
+    @JsonIgnore
+    private List<JugeDeces> jugeDeces;
+
 }

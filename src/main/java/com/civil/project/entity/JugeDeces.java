@@ -1,10 +1,10 @@
 package com.civil.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "juge_deces")
@@ -16,20 +16,33 @@ public class JugeDeces {
     @Column(name = "iddeces")
     private int iddeces;
 
-    @Column(name = "addresse_parent_ar")
-    private String addresseParentAr;
+    @Column(name = "adresse_parent_ar")
+    private String adresseParentAr;
 
-    @Column(name = "addresse_parent_fr")
-    private String addresseParentFr;
+    @Column(name = "adresse_parent_fr")
+    private String adresseParentFr;
 
     @Column(name = "cin")
     private String cin;
 
-    @Column(name = "heure")
-    private String heure;
+    @Column(name = "heure_deces")
+    private String heureDeces;
 
     @Column(name = "date_naissance")
     private Date dateNaissance;
+
+    // date naissance
+    @Column(name = "date_gregorienne_txt_ar")
+    private String dateGregorienneTxtAr;
+
+    @Column(name = "date_gregorienne_txt_fr")
+    private String dateGregorienneTxtFr;
+
+    @Column(name = "date_hijri_txt_ar")
+    private String dateHijriTxtAr;
+
+    @Column(name = "date_hijri_txt_fr")
+    private String dateHijriTxtFr;
 
     @Column(name = "declaration_ar")
     private String declarationAr;
@@ -37,40 +50,22 @@ public class JugeDeces {
     @Column(name = "declaration_fr")
     private String declarationFr;
 
-    @Column(name = "date_edition_grego")
-    private String dateEditionGrego;
+    @Column(name = "date_edition")
+    private Date dateEdition;
 
-    @Column(name = "date_edition_grego_txt_ar")
-    private String dateEditionGregoTxtAr;
+    @Column(name = "date_deces")
+    private Date dateDeces;
 
-    @Column(name = "date_edition_grego_txt_fr")
-    private String dateEditionGregoTxtFr;
+    @Column
+    private String dateDecesGregorienneTxtAr;
 
-    @Column(name = "date_deces_grego")
-    private String dateDecesGrego;
+    @Column
+    private String dateDecesGregorienneTxtFr;
 
-    @Column(name = "date_deces_grego_txt_ar")
-    private String dateDecesGregoTxtAr;
-
-    @Column(name = "date_deces_grego_txt_fr")
-    private String dateDecesGregoTxtFr;
-
-    @Column(name = "date_edition_hijri")
-    private String dateEditionHijri;
-
-    @Column(name = "date_edition_hijri_txt_ar")
-    private String dateEditionHijriTxtAr;
-
-    @Column(name = "date_edition_hijri_txt_fr")
-    private String dateEditionHijriTxtFr;
-
-    @Column(name = "date_deces_hijri")
-    private String dateDecesHijri;
-
-    @Column(name = "date_deces_hijri_txt_ar")
+    @Column
     private String dateDecesHijriTxtAr;
 
-    @Column(name = "date_deces_hijri_txt_fr")
+    @Column
     private String dateDecesHijriTxtFr;
 
     @Column(name = "prenom_ar")
@@ -91,12 +86,6 @@ public class JugeDeces {
     @Column(name = "prenom_pere_fr")
     private String prenomPereFr;
 
-    @Column(name = "nom_pere_ar")
-    private String nomPereAr;
-
-    @Column(name = "nom_pere_fr")
-    private String nomPereFr;
-
     @Column(name = "nationalite_pere_ar")
     private String nationalitePereAr;
 
@@ -115,11 +104,6 @@ public class JugeDeces {
     @Column(name = "prenom_mere_fr")
     private String prenomMereFr;
 
-    @Column(name = "nom_mere_ar")
-    private String nomMereAr;
-
-    @Column(name = "nom_mere_fr")
-    private String nomMereFr;
 
     @Column(name = "nationalite_mere_ar")
     private String nationaliteMereAr;
@@ -166,11 +150,6 @@ public class JugeDeces {
     @Column(name = "sexe_fr")
     private String sexeFr;
 
-    @Column(name = "addresse_ar")
-    private String addresseAr;
-
-    @Column(name = "addresse_fr")
-    private String addresseFr;
 
     @Column(name = "statut_ar")
     private String statutAr;
@@ -197,14 +176,20 @@ public class JugeDeces {
     private String officierFr;
 
     @Column
-    private String juge;
+    private String jugeAr;
 
     @Column
-    private String ikhbar;
+    private String jugeFr;
+
+    @Column
+    private String ikhbarAr;
+
+    @Column
+    private String ikhbarFr;
 
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.PERSIST,
             CascadeType.MERGE,CascadeType.REFRESH})
     @JoinColumn(name = "id_registre_juges_deces")
-    RegistreDeces registreDeces;
+    RegistreJugesDeces registreJugesDeces;
 
 }

@@ -10,7 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("juge-deces")
+@RequestMapping("/juge-deces")
 @RequiredArgsConstructor
 @CrossOrigin
 public class JugeDecesRest {
@@ -22,6 +22,7 @@ public class JugeDecesRest {
         return service.addJuge(jd);
     }
 
+    @GetMapping("")
     public Collection<JugeDeces> searchJuges(
         @RequestParam(required = false) String nomAr,
         @RequestParam(required = false) String nomFr,

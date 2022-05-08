@@ -22,8 +22,6 @@ public class ActeNaissanceRest {
 
     @PostMapping("")
     public ActeNaissance addActe(@RequestBody ActeNaissance acteNaissance) {
-
-
         return acteService.addActe(acteNaissance);
     }
 

@@ -16,4 +16,7 @@ public interface NaissanceActeRepository extends JpaRepository<ActeNaissance, In
 
     Set<ActeNaissance> findActeNaissanceByNomFr(String nomAr);
 
+    List<ActeNaissance> findBySexAr(String sexearabe);
+
+    List<ActeNaissance> findBySexFr(String sexefrancai);
 }

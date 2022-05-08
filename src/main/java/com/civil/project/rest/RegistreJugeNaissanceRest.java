@@ -3,6 +3,7 @@ package com.civil.project.rest;
 import com.civil.project.entity.RegistreJugeNaiss;
 import com.civil.project.service.RegistreJugeNaissanceService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,34 +17,35 @@ public class RegistreJugeNaissanceRest {
 //////////////////////////partie registre de jug de naissance
 
     //rechercher le registre de juge de naissance a partir de l'année
-    @GetMapping("/registre/juge/naissance/{date}")
-    public List<RegistreJugeNaiss> getRegistrBydate(@PathVariable int date){
-        return jugeNaissance.findByDate(date);
+    @GetMapping("/registres/annee")
+    public List<RegistreJugeNaiss> getRegistrBydate(@RequestParam(required = false) String annee){
+        return jugeNaissance.findByDate(Integer.parseInt(annee));
     }
 
     // afficher tous les registre de juge de naissance
-    @GetMapping("/registre/juge/naissance")
+    @GetMapping("/registres/tous")
     public List<RegistreJugeNaiss> findRegistres() {
-        System.out.println("hey ");
         return jugeNaissance.findRegistres();
     }
+
     //afficher le registre de juge de naissance a partir de ID de registre
-    @GetMapping("/registe/juge/naissance/{idRegistre}")
+    @GetMapping("/registe/{idRegistre}")
     public RegistreJugeNaiss getRegistres(@PathVariable int idActe)
     {
         return jugeNaissance.findByIdRegistre(idActe);
     }
 
     //supprimrer le registre de juge de naissance a partir de ID du Registre
-    @DeleteMapping("/registre/juge/naissance/delete/{id}")
-    public String deleteRegistre(@PathVariable int id)
-    {
-        jugeNaissance.deleteActe(id);
-        return "delete done";
-    }
+    @DeleteMapping("/{id}")
+    public String deleteRegistre(@PathVariable String id)
+        {
+            jugeNaissance.deleteActe(Integer.parseInt(id));
+            return "delete done";
+        }
 
     //ajouter un registre de naissance
-    @PostMapping("/registre/juge/naissance/add")
+    @PostMapping("/registre")
+    @ResponseStatus(HttpStatus.CREATED)
     public String addRegistre(@RequestBody RegistreJugeNaiss registre)
     {
         jugeNaissance.addOrUpdateRegistre(registre);
@@ -51,7 +53,7 @@ public class RegistreJugeNaissanceRest {
     }
 
     //modifier un registre de juge de naissance
-    @PutMapping("/registre/juge/naissance/update")
+    @PutMapping("/registre")
     public String UpdateRegistre(@RequestBody RegistreJugeNaiss registre)
     {
         jugeNaissance.addOrUpdateRegistre(registre);

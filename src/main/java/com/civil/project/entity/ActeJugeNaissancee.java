@@ -230,10 +230,10 @@ public class ActeJugeNaissancee {
 
     @Column(name = "type_declaration_fr")
     private String typeDeclarationFr;
-
+/*
     @Column(name = "id_registre")
     private int id_registre;
-
+*/
     @Column(name = "date_decision")
     private String date_decision;
 
@@ -267,18 +267,27 @@ public class ActeJugeNaissancee {
     @Column(name="jumeaux")
     private boolean jumeaux;
 
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH,CascadeType.PERSIST,
+            CascadeType.MERGE,CascadeType.REFRESH})
+    @JoinColumn(name = "id_registre")
+    private RegistreJugeNaiss registreJugeNaiss;
+
     @OneToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH,CascadeType.PERSIST,
                     CascadeType.MERGE,CascadeType.REFRESH})
     @Fetch(value = FetchMode.SUBSELECT)
     // todo remove joincolumn
     @JoinColumn(name="id_acte_juge_nais")
-    private List<MargJugeNaissAr> margJugeNaissArs;
+    private List<MargJugeNaissFr> margJugeNaissFrs;
 
     @OneToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH,CascadeType.PERSIST,
                     CascadeType.MERGE,CascadeType.REFRESH})
     @Fetch(value = FetchMode.SUBSELECT)
     @JoinColumn(name="id_acte_juge_nais")
-    private List<MargJugeNaissFr> margJugeNaissFrs;
+    private List<MargJugeNaissAr> margJugeNaissArs;
+
+
+
+
 }

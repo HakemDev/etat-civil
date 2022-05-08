@@ -3,6 +3,7 @@ package com.civil.project.rest;
 import com.civil.project.entity.Utilisateur;
 import com.civil.project.service.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,14 +34,14 @@ public class UtilisateurRest {
     }
     @PostMapping("/utilisateur/add")
     public Utilisateur add(@RequestBody Utilisateur utilisateur)
-    {
-        service.addOrUpdateUser(utilisateur);
-        return utilisateur;
-    }
+        {
+            service.addOrUpdateUser(utilisateur);
+            return utilisateur;
+        }
     @DeleteMapping("/utilisateur/delete/{id}")
     public String delete(@PathVariable int id)
-    {
-        service.deleteUtilisateur(id);
-        return "delete with succes";
-    }
+        {
+            service.deleteUtilisateur(id);
+            return "delete with succes";
+        }
 }

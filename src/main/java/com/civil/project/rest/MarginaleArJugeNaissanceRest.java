@@ -3,6 +3,7 @@ package com.civil.project.rest;
 import com.civil.project.entity.MargJugeNaissAr;
 import com.civil.project.service.MarginaleArJugeNaissanceService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,35 +17,36 @@ public class MarginaleArJugeNaissanceRest {
 /////////////////////////////Partie Marginale Arabe de juge de naissance
 
     //ajouter marginal arabic de juge de naissance
-    @PostMapping("/marginal/juge/naissance/ar/save")
-    public String save(@RequestBody MargJugeNaissAr margJugeNaissAr){
-        jugeNaissance.AjouterOuModifierMargAr(margJugeNaissAr);
-        return "marginale arabe De Juge de Naissance est bien ajouté";
-    }
+    @PostMapping("/marginal/arabe")
+    @ResponseStatus(HttpStatus.CREATED)
+    public MargJugeNaissAr save(@RequestBody MargJugeNaissAr margJugeNaissAr)
+        {
+            return jugeNaissance.AjouterOuModifierMargAr(margJugeNaissAr);
+        }
 
     //afficher les marginales arabic de juge de naissance
-    @GetMapping("/marginal/juge/naissance/ar/list")
+    @GetMapping("/marginales/arabe")
     public List<MargJugeNaissAr> listMarg_ar(){
         return jugeNaissance.afficherMarginalAr();
     }
 
     //supprimer marginal arabic de juge de naissance
-    @DeleteMapping("/marginal/juge/naissance/ar/delete/{id}")
-    public String deleteMarg_ar(@PathVariable int idMargeJuge){
-        jugeNaissance.SupprimerMargAr(idMargeJuge);
+    @DeleteMapping("/marginal/arabe/{id}")
+    public String deleteMarg_ar(@PathVariable String idMargeJuge){
+        jugeNaissance.SupprimerMargAr(Integer.parseInt(idMargeJuge));
         return "deleted successfuly";
     }
 
     //chercher le marginal arabic de juge de naissance a partir de id acte de juge de naissance
-    @GetMapping("/marginal/juge/naissance/ar/IdActe/{id}")
-    public List<MargJugeNaissAr> listByActeIdMargar(@PathVariable int id){
-        return jugeNaissance.MargArByIdActeJugeNaissance(id);
+    @GetMapping("/marginales/arabe/{id}")
+    public List<MargJugeNaissAr> listByActeIdMargar(@PathVariable String id){
+        return jugeNaissance.MargArByIdActeJugeNaissance(Integer.parseInt(id));
     }
 
-    //chercher le marginal francais de juge de naissance a partir de id du marginale de juge de naissance
-    @GetMapping("/marginal/juge/naissance/ar/{id}")
-    public MargJugeNaissAr listByIdMargar(@PathVariable int id){
-        return jugeNaissance.MargArById(id);
+    //chercher le marginal arabic de juge de naissance a partir de id du marginale de juge de naissance
+    @GetMapping("/marginal/arabe/{id}")
+    public MargJugeNaissAr listByIdMargar(@PathVariable String id){
+        return jugeNaissance.MargArById(Integer.parseInt(id));
     }
 
 

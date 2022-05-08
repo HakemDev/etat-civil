@@ -215,6 +215,7 @@ public class ActeNaissance {
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH,CascadeType.PERSIST,
             CascadeType.MERGE,CascadeType.REFRESH})
     @JoinColumn(name = "id_registre")
+
     private RegistreNaiss registre;
 
 }

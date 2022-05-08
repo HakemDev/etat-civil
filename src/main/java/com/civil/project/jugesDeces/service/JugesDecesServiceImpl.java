@@ -1,9 +1,9 @@
-package com.civil.project.jugesDeces;
+package com.civil.project.jugesDeces.service;
 
-import com.civil.project.dao.JugeDecesRepository;
-import com.civil.project.dao.RegistreJugeDecesRepository;
-import com.civil.project.entity.JugeDeces;
-import com.civil.project.entity.RegistreJugesDeces;
+import com.civil.project.jugesDeces.dao.JugeDecesRepository;
+import com.civil.project.jugesDeces.dao.RegistreJugeDecesRepository;
+import com.civil.project.jugesDeces.entity.JugeDeces;
+import com.civil.project.jugesDeces.entity.RegistreJugesDeces;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

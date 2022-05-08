@@ -1,8 +1,7 @@
-package com.civil.project.jugesDeces;
+package com.civil.project.jugesDeces.service;
 
-import com.civil.project.entity.JugeDeces;
+import com.civil.project.jugesDeces.entity.JugeDeces;
 
-import java.util.List;
 import java.util.Set;
 
 public interface JugesDecesService {

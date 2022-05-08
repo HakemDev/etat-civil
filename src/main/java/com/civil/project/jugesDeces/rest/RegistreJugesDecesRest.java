@@ -1,6 +1,7 @@
-package com.civil.project.jugesDeces;
+package com.civil.project.jugesDeces.rest;
 
-import com.civil.project.entity.RegistreJugesDeces;
+import com.civil.project.jugesDeces.entity.RegistreJugesDeces;
+import com.civil.project.jugesDeces.service.RegistreJugesDecesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

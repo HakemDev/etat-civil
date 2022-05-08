@@ -1,7 +1,7 @@
-package com.civil.project.dao;
+package com.civil.project.jugesDeces.dao;
 
 
-import com.civil.project.entity.JugeDeces;
+import com.civil.project.jugesDeces.entity.JugeDeces;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

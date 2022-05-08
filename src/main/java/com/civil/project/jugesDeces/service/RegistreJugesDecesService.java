@@ -1,6 +1,6 @@
-package com.civil.project.jugesDeces;
+package com.civil.project.jugesDeces.service;
 
-import com.civil.project.entity.RegistreJugesDeces;
+import com.civil.project.jugesDeces.entity.RegistreJugesDeces;
 
 import java.util.List;
 

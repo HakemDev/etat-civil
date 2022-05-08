@@ -1,5 +1,6 @@
-package com.civil.project.entity;
+package com.civil.project.jugesDeces.entity;
 
+import com.civil.project.jugesDeces.entity.JugeDeces;
 import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import lombok.Data;
 

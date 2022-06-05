@@ -1,7 +1,5 @@
 package com.civil.project.jugesDeces.service;
 
-import com.civil.project.entity.ActeNaissance;
-import com.civil.project.entity.MargNaisAr;
 import com.civil.project.jugesDeces.dao.JugeDecesRepository;
 import com.civil.project.jugesDeces.dao.MargJugeDecesArRepository;
 import com.civil.project.jugesDeces.entity.JugeDeces;

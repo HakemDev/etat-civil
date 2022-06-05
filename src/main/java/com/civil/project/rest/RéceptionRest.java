@@ -1,7 +1,6 @@
 package com.civil.project.rest;
 
 import com.civil.project.dto.Reception;
-import com.civil.project.entity.ActeJugeNaissancee;
 import com.civil.project.service.ReceptionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

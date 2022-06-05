@@ -1,8 +1,7 @@
-package com.civil.project.jugesDeces.rest;
+package com.civil.project.naissances.rest;
 
-
-import com.civil.project.jugesDeces.entity.MarginaleJugeDecesAr;
-import com.civil.project.jugesDeces.service.MargJugesDecesArService;
+import com.civil.project.naissances.entity.MargNaisAr;
+import com.civil.project.naissances.service.MarginalesArService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -11,35 +10,33 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/marginales-juges-deces-ar")
+@RequestMapping("/marginales-ar")
 @CrossOrigin
 @RequiredArgsConstructor
-public class MargJugesDecesArRest {
+public class MarginalesArRest {
 
-    private final MargJugesDecesArService service;
-
+    private final MarginalesArService service;
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public MarginaleJugeDecesAr addMarginaleAr(@RequestBody MarginaleJugeDecesAr margNaisAr) {
+    public MargNaisAr addMarginaleAr(@RequestBody MargNaisAr margNaisAr) {
         return service.addMarg(margNaisAr);
     }
 
     @GetMapping("")
-    public List<MarginaleJugeDecesAr> getMarginalesAr(@RequestParam(required = false,
-    name = "idJuge") String idActe){
+    public List<MargNaisAr> getMarginalesAr(@RequestParam(required = false) String idActe){
         try {
             if(idActe == null)
-                return service.findAllMargJugesDecesAr();
+                return service.findAllMargNaisAr();
 
-            return service.findMarginalesByIdJuges(Integer.parseInt(idActe));
+            return service.findMargNaisArByIdActe(Integer.parseInt(idActe));
         } catch (NumberFormatException e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Identificateur invalide.");
         }
     }
 
     @PutMapping("")
-    public MarginaleJugeDecesAr updateMarginaleAr(@RequestBody MarginaleJugeDecesAr margNaisAr) {
+    public MargNaisAr updateMarginaleAr(@RequestBody MargNaisAr margNaisAr) {
         return service.updateMarg(margNaisAr);
     }
 
@@ -52,4 +49,5 @@ public class MargJugesDecesArRest {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Identificateur invalide.");
         }
     }
+
 }

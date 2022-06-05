@@ -1,7 +1,7 @@
 package com.civil.project.service;
 
-import com.civil.project.dao.JugeNaissanceActeRep;
-import com.civil.project.dao.NaissanceActeRepository;
+import com.civil.project.jugesNaissances.dao.JugeNaissanceActeRep;
+import com.civil.project.naissances.dao.NaissanceActeRepository;
 import com.civil.project.dto.Reception;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -3,39 +3,55 @@ package com.civil.project.deces.rest;
 import com.civil.project.deces.entity.RegistreDeces;
 import com.civil.project.deces.service.RegistreDecesService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/deces")
+@RequestMapping("/registre-actes-deces")
 @RequiredArgsConstructor
+@CrossOrigin
 public class RegistreDecesRest {
 
     private final RegistreDecesService service;
 
-    @PostMapping("/registre/save")
-    public void save(@RequestBody RegistreDeces registreDeces){
-        service.ajouterRegistreD(registreDeces);
+    @PostMapping("")
+    public RegistreDeces save(@RequestBody RegistreDeces registreDeces){
+        return service.ajouterRegistreD(registreDeces);
     }
 
-    @PostMapping("/registre/update")
-    public void update(@RequestBody RegistreDeces acteDeces){
-        service.modifierRegistreD(acteDeces);
+    @PutMapping("")
+    public RegistreDeces update(@RequestBody RegistreDeces acteDeces){
+        return service.modifierRegistreD(acteDeces);
     }
 
-    @GetMapping("/registre/list")
-    List<RegistreDeces> lister(){
+    @GetMapping("")
+    public List<RegistreDeces> lister(){
         return service.listerRegistreD();
     }
 
-    @GetMapping("/registre/{id}")
-    RegistreDeces getById(@PathVariable int id){
-        return service.trouverParId(id);
+    @GetMapping("/{idOrPartieAnnee}")
+    public RegistreDeces getByIdOrDateAnnee(@PathVariable String idOrPartieAnnee){
+        try {
+            if(idOrPartieAnnee.matches("[0-9]+-[0-9]{4}")) {
+                String[] partieAnnee = idOrPartieAnnee.split("-");
+                return service.findRegistreDecesByAnneeAndPartie(
+                        Integer.parseInt(partieAnnee[1]),
+                        Integer.parseInt(partieAnnee[0])
+                );
+            } else {
+                return service.trouverParId(Integer.parseInt(idOrPartieAnnee));
+            }
+        } catch (NumberFormatException e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Identificateur invalide.");
+        }
     }
 
-    @DeleteMapping("/registre/delete/{id}")
-    void suppById(@PathVariable int id){
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void suppById(@PathVariable int id){
         service.supprimerRegistreD(id);
     }
 

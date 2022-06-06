@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface DecesRegistreRep extends JpaRepository<RegistreDeces,Integer> {
     List<RegistreDeces> findByAnnee(int date);
+    RegistreDeces findByAnneeAndPartie(int annee,int partie);
 }

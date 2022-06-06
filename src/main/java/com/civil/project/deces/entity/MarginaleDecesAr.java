@@ -14,13 +14,13 @@ public class MarginaleDecesAr {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_marg_deces_ar")
-    private int idMargDecesAr;
+    private int idMarginale;
 
     @Column(name = "marginale_deces_libelle_ar")
-    private String marginaleDecesLibelleAr;
+    private String libelle;
 
     @Column(name = "marginale_deces_txt_ar")
-    private String marginaleDecesTxtAr;
+    private String texte;
 
 
 

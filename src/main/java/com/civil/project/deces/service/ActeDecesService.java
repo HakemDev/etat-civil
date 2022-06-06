@@ -1,17 +1,15 @@
 package com.civil.project.deces.service;
 
 import com.civil.project.deces.entity.ActeDeces;
+import com.civil.project.deces.entity.RegistreDeces;
 
-import java.util.List;
+import java.util.Set;
 
 public interface ActeDecesService {
-    void ajouterActeD(ActeDeces acteDeces);
-    void modifierActeD(ActeDeces acteDeces);
+    ActeDeces ajouterActeD(ActeDeces acteDeces);
+    ActeDeces modifierActeD(ActeDeces acteDeces);
     ActeDeces trouverActeDParId(int i);
-   // List<ActeDeces> trouverActeDParAnnee(int i);
-   // List<ActeDeces> trouverActeDParNom(String i);
-   // List<ActeDeces> trouverActeDParNumero(String i);
-    List<ActeDeces> listerActeD();
+    Set<ActeDeces> listerActeD(String nomAr, String nomFr, String numero);
     void supprimerActeD(int i);
 
 

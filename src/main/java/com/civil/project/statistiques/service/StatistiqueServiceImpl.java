@@ -1,5 +1,9 @@
 package com.civil.project.statistiques.service;
 
+import com.civil.project.deces.dao.DecesActeRep;
+import com.civil.project.deces.entity.ActeDeces;
+import com.civil.project.jugesDeces.dao.JugeDecesRepository;
+import com.civil.project.jugesDeces.entity.JugeDeces;
 import com.civil.project.jugesNaissances.dao.JugeNaissanceActeRep;
 import com.civil.project.naissances.dao.NaissanceActeRepository;
 import com.civil.project.dto.StatistiqueAdulte;
@@ -13,6 +17,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.text.DecimalFormat;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -21,10 +27,15 @@ public class StatistiqueServiceImpl implements StatistiqueService{
 
     private final JugeNaissanceActeRep jugeNaissanceActeRep;
     private final NaissanceActeRepository naissanceActeRepository;
+    private final JugeDecesRepository jugeDecesRepository;
+    private final DecesActeRep decesActeRep;
 
+    //عدد الولادات و الوفيات و أحكام الولادات و أحكام الوفيات بالنسبة للدكور و الإناث
     @Override
     public StatistiquePourcentageSexeActes graphes() {
 
+        DecimalFormat f = new DecimalFormat();
+        f.setMaximumFractionDigits(2);
 
         //////Partie Juge Naissance
         int nbrActeJugeNaissanceHomme=jugeNaissanceActeRep.findBySexFr("homme").size();
@@ -41,33 +52,34 @@ public class StatistiqueServiceImpl implements StatistiqueService{
         float pourcentageActeNaissFemme=( (float) nbrActeNaissanceFemme*100)/nbrActeNaissanceTotal;
 
         /////Partie Juge Dece
-        int nbrJugeActeDeceHomme=0;
-        int nbrJugeActeDeceFemme=0;
-        int nbrActeJugeDeceTotal=0;
+        int nbrJugeActeDeceHomme=jugeDecesRepository.findBySexeFr("homme").size();
+        int nbrJugeActeDeceFemme=jugeDecesRepository.findBySexeFr("femme").size();
+        int nbrActeJugeDeceTotal=nbrJugeActeDeceHomme+nbrJugeActeDeceFemme;
         float pourcentageActeJugeDeceHomme=((float)nbrJugeActeDeceHomme*100)/nbrActeJugeDeceTotal;
         float pourcentageActeJugeDeceFemme=((float)nbrJugeActeDeceFemme*100)/nbrActeJugeDeceTotal;
 
         /////Partie Dece
-        int nbrActeDeceHomme=0;
-        int nbrActeDeceFemme=0;
-        int nbrActeDeceTotal=0;
+        int nbrActeDeceHomme=decesActeRep.findBySexeFr("homme").size();
+        int nbrActeDeceFemme=decesActeRep.findBySexeFr("femme").size();
+        int nbrActeDeceTotal=nbrActeDeceHomme+nbrActeDeceFemme;
         float pourcentageActeDeceHomme=((float)nbrActeDeceHomme*100)/nbrActeDeceTotal;
         float pourcentageActeDeceFemme=((float) nbrActeDeceFemme*100)/nbrActeDeceTotal;
 
         StatistiquePourcentageSexeActes pourcentageSexeActes=new StatistiquePourcentageSexeActes(
-                pourcentageActeNaissHomme,
-                pourcentageActeNaissFemme,
-                pourcentageActeJugeNaissHomme,
-                pourcentageActeJugeNaissFemme,
-                pourcentageActeDeceHomme,
-                pourcentageActeDeceFemme,
-                pourcentageActeJugeDeceHomme,
-                pourcentageActeJugeDeceFemme
+                Math.round(pourcentageActeNaissHomme),
+                Math.round(pourcentageActeNaissFemme) ,
+                Math.round(pourcentageActeJugeNaissHomme) ,
+                Math.round(pourcentageActeJugeNaissFemme) ,
+                Math.round(pourcentageActeDeceHomme) ,
+                Math.round(pourcentageActeDeceFemme) ,
+                Math.round(pourcentageActeJugeDeceHomme) ,
+                Math.round(pourcentageActeJugeDeceFemme)
         );
 
         return pourcentageSexeActes;
     }
 
+    //ملخص الإحصائيات
     @Override
     public StatistiqueNbrActesSexe resume(int mois, int annee) {
         System.out.println("mois "+mois+" anne "+annee);
@@ -77,36 +89,67 @@ public class StatistiqueServiceImpl implements StatistiqueService{
         int nbrActeNaissanceHomme=0;
         int nbrActeNaissanceFemme=0;
         List<ActeNaissance> acteNaissance=naissanceActeRepository.findByAnnee(annee);
-        for(ActeNaissance acteNaissance1:acteNaissance)
-            {
-                String[] date=acteNaissance1.getDateNaissance().toString().split("-");
+        if(!acteNaissance.isEmpty()) {
+            for (ActeNaissance acteNaissance1 : acteNaissance) {
+                String[] date = acteNaissance1.getDateNaissance().toString().split("-");
 
-                nbrActeNaissanceHomme=nbrActeNaissanceHomme+(Integer.parseInt(date[1])==mois?(acteNaissance1.getSexFr().equals("homme")?1:0):0);
-                nbrActeNaissanceFemme=nbrActeNaissanceFemme+(Integer.parseInt(date[1])==mois?(acteNaissance1.getSexFr().equals("femme")?1:0):0);
+                nbrActeNaissanceHomme = nbrActeNaissanceHomme + (Integer.parseInt(date[1]) == mois ? (acteNaissance1.getSexFr().equals("homme") ? 1 : 0) : 0);
+                nbrActeNaissanceFemme = nbrActeNaissanceFemme + (Integer.parseInt(date[1]) == mois ? (acteNaissance1.getSexFr().equals("femme") ? 1 : 0) : 0);
 
             }
+        }
 
         //////Partie Juge Naissance
         int nbrActeJugeNaissanceHomme=0;
         int nbrActeJugeNaissanceFemme=0;
         List<ActeJugeNaissancee> acteJugeNaissancees=jugeNaissanceActeRep.findByAnnee(annee);
-        for(ActeJugeNaissancee acteJugeNaissancee:acteJugeNaissancees)
-            {
-                String[] date=acteJugeNaissancee.getDateNaissance().toString().split("-");
+        if(!acteJugeNaissancees.isEmpty())
+        {
+            for(ActeJugeNaissancee acteJugeNaissancee:acteJugeNaissancees)
+                {
+                    String[] date=acteJugeNaissancee.getDateNaissance().toString().split("-");
 
-                nbrActeJugeNaissanceHomme=nbrActeJugeNaissanceHomme+(Integer.parseInt(date[1])==mois?(acteJugeNaissancee.getSexFr().equals("homme")?1:0):0);
-                nbrActeJugeNaissanceFemme=nbrActeJugeNaissanceFemme+(Integer.parseInt(date[1])==mois?(acteJugeNaissancee.getSexFr().equals("femme")?1:0):0);
+                    nbrActeJugeNaissanceHomme=nbrActeJugeNaissanceHomme+(Integer.parseInt(date[1])==mois?(acteJugeNaissancee.getSexFr().equals("homme")?1:0):0);
+                    nbrActeJugeNaissanceFemme=nbrActeJugeNaissanceFemme+(Integer.parseInt(date[1])==mois?(acteJugeNaissancee.getSexFr().equals("femme")?1:0):0);
 
-            }
+                }
+        }
         /////Partie Dece
         int nbrActeDeceHomme=0;
         int nbrActeDeceFemme=0;
+        List<ActeDeces> acteDeces=decesActeRep.findAll();
+
+        List<ActeDeces> acteDecesList=  acteDeces
+                                        .stream()
+                                        .filter(q->Integer.parseInt(q.getDateDeces().toString().split("-")[0])==annee)
+                                        .collect(Collectors.toList());
+        for(ActeDeces acteDeces1:acteDecesList)
+            {
+                String[] date=acteDeces1.getDateDeces().toString().split("-");
+                nbrActeDeceHomme=nbrActeDeceHomme+(Integer.parseInt(date[1])==mois?(acteDeces1.getSexeFr().equals("homme")?1:0):0);
+                nbrActeDeceFemme=nbrActeDeceFemme+(Integer.parseInt(date[1])==mois?(acteDeces1.getSexeFr().equals("femme")?1:0):0);
+            }
+
 
         /////Partie Juge Dece
         int nbrJugeActeDeceHomme=0;
         int nbrJugeActeDeceFemme=0;
 
+        List<JugeDeces> jugeDecesRepositoryList=jugeDecesRepository.findAll();
 
+        List<JugeDeces> jugeDecesRepositories=  jugeDecesRepositoryList
+                .stream()
+                .filter(q->Integer.parseInt(q.getDateDeces().toString().split("-")[0])==annee)
+                .collect(Collectors.toList());
+        log.info("nbr "+jugeDecesRepositories.size());
+        for(JugeDeces jugeDeces:jugeDecesRepositories)
+        {
+            String[] date=jugeDeces.getDateDeces().toString().split("-");
+            nbrJugeActeDeceHomme=nbrJugeActeDeceHomme+(Integer.parseInt(date[1])==mois?(jugeDeces.getSexeFr().equals("homme")?1:0):0);
+            nbrJugeActeDeceFemme=nbrJugeActeDeceFemme+(Integer.parseInt(date[1])==mois?(jugeDeces.getSexeFr().equals("femme")?1:0):0);
+        }
+
+        //Resultat
         StatistiqueNbrActesSexe statistiqueNbrActesSexe=new StatistiqueNbrActesSexe(
                 nbrActeNaissanceHomme,
                 nbrActeNaissanceFemme,
@@ -127,6 +170,7 @@ public class StatistiqueServiceImpl implements StatistiqueService{
 
     }
 
+    //الأطفال البالغين
     @Override
     public List<StatistiqueAdulte> adulte(int ans, int annee) {
         List<StatistiqueAdulte> statistiquesAdulte=new ArrayList<>();
@@ -147,7 +191,7 @@ public class StatistiqueServiceImpl implements StatistiqueService{
             StatistiqueAdulte resultatsmall=new StatistiqueAdulte(acteJugeNaissancee.getNumeroActe(), acteJugeNaissancee.getNomAr(), acteJugeNaissancee.getPrenomAr(), acteJugeNaissancee.getDateNaissance(), acteJugeNaissancee.getDateEdition(),ans, annee);
             statistiquesAdulte.add(resultatsmall);
         }
-
+        
         return statistiquesAdulte;
     }
 

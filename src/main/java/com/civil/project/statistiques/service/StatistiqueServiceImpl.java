@@ -82,7 +82,7 @@ public class StatistiqueServiceImpl implements StatistiqueService{
     //ملخص الإحصائيات
     @Override
     public StatistiqueNbrActesSexe resume(int mois, int annee) {
-        System.out.println("mois "+mois+" anne "+annee);
+        //System.out.println("mois "+mois+" anne "+annee);
 
 
         //////Partie Naissance

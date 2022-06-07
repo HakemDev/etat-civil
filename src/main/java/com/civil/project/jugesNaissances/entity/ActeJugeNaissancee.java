@@ -126,11 +126,6 @@ public class ActeJugeNaissancee {
     @Column(name = "annee_naissance_pere")
     private int anneeNaissancePere;
 
-    @Column(name = "nom_mere_ar")
-    private String nomMereAr;
-
-    @Column(name = "nom_mere_fr")
-    private String nomMereFr;
 
     @Column(name = "prenom_mere_ar")
     private String prenomMereAr;

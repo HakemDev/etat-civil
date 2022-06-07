@@ -45,8 +45,9 @@ public class RegistreJugeNaiss {
 
     @OneToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH,CascadeType.PERSIST,
-                    CascadeType.MERGE,CascadeType.REFRESH})
-    @JoinColumn(name="id_registre")
+                    CascadeType.MERGE,CascadeType.REFRESH},
+            mappedBy = "registreJugeNaiss"
+    )
     @JsonIgnore
     private List<ActeJugeNaissancee> actesjugenaissancee;
 

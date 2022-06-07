@@ -85,6 +85,9 @@ public class JugesDecesServiceImpl implements JugesDecesService{
         }
 
         if(numero != null) {
+            if(!numero.matches("[0-9]+/[0-9]{4}")){
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Numero de registre invalide");
+            }
             String[] partieAnnee = numero.split("/");
             RegistreJugesDeces registreJugesDeces = registreRepo.findRegistreJugesDecesByAnneeAndPartie(
                     Integer.parseInt(partieAnnee[1]),

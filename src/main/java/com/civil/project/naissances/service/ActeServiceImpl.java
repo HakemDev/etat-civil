@@ -106,6 +106,9 @@ public class ActeServiceImpl implements ActeService {
         }
 
         if(numero != null){
+            if(!numero.matches("[0-9]+/[0-9]{4}")){
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Numero de registre invalide");
+            }
             String[] partieAnnee = numero.split("/");
             RegistreNaiss registreNaissByAnneeAndPartie = registreRepo.findRegistreNaissByAnneeAndPartie(
                     Integer.parseInt(partieAnnee[1]),

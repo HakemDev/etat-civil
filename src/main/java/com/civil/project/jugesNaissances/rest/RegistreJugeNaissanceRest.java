@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/registres-juges-naissance")
 @RequiredArgsConstructor
+@CrossOrigin
 public class RegistreJugeNaissanceRest {
 
 

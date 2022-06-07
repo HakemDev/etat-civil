@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/marginales-juges-naissances-ar")
 @RequiredArgsConstructor
+@CrossOrigin
 public class MarginaleArJugeNaissanceRest {
     private final MarginaleArJugeNaissanceService jugeNaissance;
 

@@ -2,16 +2,18 @@ package com.civil.project.jugesNaissances.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import lombok.Data;
+import lombok.ToString;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name="acte_juge_naissance")
 @Data
-@JsonIgnoreType
+@ToString
 public class ActeJugeNaissancee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -36,14 +38,9 @@ public class ActeJugeNaissancee {
     @Column(name = "classement")
     private int classement;
 
-    @Column(name = "minute")
-    private int minute;
-
     @Column(name = "annee")
-    private int annee;
+    private Integer annee;
 
-    @Column(name = "adresse_parent")
-    private String adresseParent;
 
     @Column(name = "heure_naissance")
     private String heureNaissance;
@@ -75,17 +72,11 @@ public class ActeJugeNaissancee {
     @Column(name = "date_hijri_txt_fr")
     private String dateHijriTxtFr;
 
-    @Column(name = "sexe_ar")
+    @Column(name = "sex_ar")
     private String sexAr;
 
-    @Column(name = "sexe_fr")
+    @Column(name = "sex_fr")
     private String sexFr;
-
-    @Column(name = "nom_pere_ar")
-    private String nomPereAr;
-
-    @Column(name = "nom_pere_fr")
-    private String nomPereFr;
 
     @Column(name = "prenom_pere_ar")
     private String prenomPereAr;
@@ -125,6 +116,12 @@ public class ActeJugeNaissancee {
 
     @Column(name = "date_hijri_pere_txt_fr")
     private String dateHijriPereTxtFr;
+
+    @Column(name = "nom_pere_pere_fr")
+    private String nomPerePereFr;
+
+    @Column(name = "nom_pere_pere_ar")
+    private String nomPerePereAr;
 
     @Column(name = "annee_naissance_pere")
     private int anneeNaissancePere;
@@ -177,18 +174,6 @@ public class ActeJugeNaissancee {
     @Column(name = "date_hijri_mere_txt_ar")
     private String dateHijriMereTxtAr;
 
-    @Column(name = "date_hijri_mere_edition_fr")
-    private String date_hijri_mere_edition_fr;
-
-    @Column(name = "date_gregorienne_edition_txt_ar")
-    private String date_gregorienne_edition_txt_ar;
-
-    @Column(name = "date_gregorienne_edition_txt_fr")
-    private String date_gregorienne_edition_txt_fr;
-
-    @Column(name = "date_hijri_edition_txt_ar")
-    private String date_hijri_edition_txt_ar;
-
     @Column(name = "nom_pere_mere_ar")
     private String nomPereMereAr;
 
@@ -213,13 +198,6 @@ public class ActeJugeNaissancee {
     @Column(name = "date_edition")
     private String dateEdition;
 
-
-    @Column(name = "declaration_ar")
-    private String declaration_ar;
-
-    @Column(name = "declaration_fr")
-    private String declaration_fr;
-
     @Column(name = "officier_ar")
     private String officierAr;
 
@@ -228,33 +206,6 @@ public class ActeJugeNaissancee {
 
     @Column(name = "type_declaration_fr")
     private String typeDeclarationFr;
-/*
-    @Column(name = "id_registre")
-    private int id_registre;
-*/
-    @Column(name = "date_decision")
-    private String date_decision;
-
-    @Column(name = "date_affichage")
-    private String date_affichage;
-
-    @Column(name="acte_ar")
-    private String acteAr;
-
-    @Column(name="acte_fr")
-    private String acteFr;
-
-    @Column(name="extrait_ar")
-    private String extraitAr;
-
-    @Column(name="extrait_fr")
-    private String extraitFr;
-
-    @Column(name="lieu_naissance_parents_ar")
-    private String lieuNaissanceParentsAr;
-
-    @Column(name="lieu_naissance_parents_fr")
-    private String lieuNaissanceParentsFr;
 
     @Column(name="mere_defunte")
     private boolean mereDefunte;
@@ -265,25 +216,24 @@ public class ActeJugeNaissancee {
     @Column(name="jumeaux")
     private boolean jumeaux;
 
+    @Column(name="acte_ar")
+    private String acteAr;
+
+    @Column(name="acte_fr")
+    private String acteFr;
+
+    @Column(name = "date_juge")
+    private String dateJuge;
+
+    @Column
+    private String ikhbar;
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH,CascadeType.PERSIST,
             CascadeType.MERGE,CascadeType.REFRESH})
     @JoinColumn(name = "id_registre")
     private RegistreJugeNaiss registreJugeNaiss;
 
-    @OneToMany(fetch = FetchType.LAZY,
-            cascade = {CascadeType.DETACH,CascadeType.PERSIST,
-                    CascadeType.MERGE,CascadeType.REFRESH})
-    @Fetch(value = FetchMode.SUBSELECT)
-    // todo remove joincolumn
-    @JoinColumn(name="id_acte_juge_nais")
-    private List<MargJugeNaissFr> margJugeNaissFrs;
 
-    @OneToMany(fetch = FetchType.LAZY,
-            cascade = {CascadeType.DETACH,CascadeType.PERSIST,
-                    CascadeType.MERGE,CascadeType.REFRESH})
-    @Fetch(value = FetchMode.SUBSELECT)
-    @JoinColumn(name="id_acte_juge_nais")
-    private List<MargJugeNaissAr> margJugeNaissArs;
 
 
 

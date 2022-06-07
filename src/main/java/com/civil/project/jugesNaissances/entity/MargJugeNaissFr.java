@@ -1,5 +1,7 @@
 package com.civil.project.jugesNaissances.entity;
 
+import com.civil.project.naissances.entity.ActeNaissance;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,12 +19,14 @@ public class MargJugeNaissFr {
     @Column(name = "id_marg_fr")
     private int id_marg_fr;
 
-    @Column(name = "id_acte_juge_nais")
-    private int idActeJugeNais;
+    @JoinColumn(name = "id_acte_juge_nais")
+    @ManyToOne
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private ActeJugeNaissancee acteNaissance;
 
     @Column(name = "marginale_txt_fr")
-    private String marginale_txt_fr;
+    private String marginaleTxtFr;
 
     @Column(name = "libelle_marginale_fr")
-    private String libelle_marginale_fr;
+    private String libelleMarginaleFr;
 }

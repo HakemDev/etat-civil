@@ -23,7 +23,6 @@ import java.util.*;
                 acteJugeNaissance.getRegistreJugeNaiss().getAnnee(),
                 acteJugeNaissance.getRegistreJugeNaiss().getPartie()
         );
-
         if(registreJugeNaiss == null){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     String.format("Le registre %d/%d n'exsite pas",
@@ -32,7 +31,9 @@ import java.util.*;
         }
 
         for(ActeJugeNaissancee acte : registreJugeNaiss.getActesjugenaissancee()) {
-            if(acteJugeNaissance.getNumeroActe() == acte.getNumeroActe()){
+            if(acteJugeNaissance.getNumeroActe() == acte.getNumeroActe()
+                && acteJugeNaissance.getIdNaissance() != acte.getIdNaissance()
+            ){
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                         String.format("L'acte numero %d dans le registre de juge de naissance %d/%d existe deja",
                                 acteJugeNaissance.getNumeroActe(),
@@ -42,8 +43,8 @@ import java.util.*;
         }
 
         registreJugeNaiss.setNombreActes(registreJugeNaiss.getNombreActes() + 1);
-
-        acteJugeNaissance.setRegistreJugeNaiss(registreJugeNaiss);
+        if(acteJugeNaissance.getRegistreJugeNaiss().getIdRegistre() == 0)
+            acteJugeNaissance.setRegistreJugeNaiss(registreJugeNaiss);
         return jugeNaissanceActeRep.save(acteJugeNaissance);
     }
 
@@ -61,16 +62,12 @@ import java.util.*;
     public ActeJugeNaissancee ActeJugeNaiss(int id) {
 
         Optional<ActeJugeNaissancee> resultat=jugeNaissanceActeRep.findById(id);
-
-        ActeJugeNaissancee acteJugeNaissancee=null;
-        if(resultat.isPresent())
-        {
-            acteJugeNaissancee=resultat.get();
+        if(resultat.isPresent()) {
+          return resultat.get();
         }
         else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Acte de juge de naissance non trouve");
         }
-        return acteJugeNaissancee;
     }
 
     @Override
@@ -87,7 +84,10 @@ import java.util.*;
         }
 
         if(numero != null){
-            System.out.println("3333");
+
+            if(!numero.matches("[0-9]+/[0-9]{4}")){
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Numero de registre invalide");
+            }
 
             String[] partieAnnee = numero.split("/");
             RegistreJugeNaiss registreJugeNaiss = jugeNaissanceRegistreRep.findRegistreNaissByAnneeAndPartie(
@@ -97,7 +97,7 @@ import java.util.*;
             byNumero = registreJugeNaiss != null ?
                     registreJugeNaiss.getActesjugenaissancee() : new ArrayList<>();
         }
-        System.out.println("11111");
+
 
         List<ActeJugeNaissancee> result =jugeNaissanceActeRep.findAll();
 
@@ -116,11 +116,10 @@ import java.util.*;
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"acte de juge de naissance manque d'info");
             }
 
-        ActeJugeNaissancee acteJugeNaissancee1=ActeJugeNaiss(acteJugeNaissancee.getIdNaissance());
-        if( acteJugeNaissancee1==null)
-            {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Acte de juge de nsaissance non existant");
-            }
+        Optional<ActeJugeNaissancee> byId = jugeNaissanceActeRep.findById(acteJugeNaissancee.getIdNaissance());
+        if( !byId.isPresent() ) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Acte de juge de naissance non existant");
+        }
 
         return AjouterOuModifierActeJugNaissa(acteJugeNaissancee);
     }

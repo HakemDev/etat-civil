@@ -2,62 +2,68 @@ package com.civil.project.jugesNaissances.rest;
 
 import com.civil.project.jugesNaissances.entity.RegistreJugeNaiss;
 import com.civil.project.jugesNaissances.service.RegistreJugeNaissanceService;
+import com.civil.project.naissances.entity.RegistreNaiss;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/jugeNaissance")
+@RequestMapping("/registres-juges-naissance")
 @RequiredArgsConstructor
 public class RegistreJugeNaissanceRest {
-    private final RegistreJugeNaissanceService jugeNaissance;
 
-//////////////////////////partie registre de jug de naissance
 
-    //rechercher le registre de juge de naissance a partir de l'année
-    @GetMapping("/registres/annee")
-    public List<RegistreJugeNaiss> getRegistrBydate(@RequestParam(required = false) String annee){
-        return jugeNaissance.findByDate(Integer.parseInt(annee));
-    }
+    private final RegistreJugeNaissanceService service;
 
-    // afficher tous les registre de juge de naissance
-    @GetMapping("/registres/tous")
-    public List<RegistreJugeNaiss> findRegistres() {
-        return jugeNaissance.findRegistres();
-    }
-
-    //afficher le registre de juge de naissance a partir de ID de registre
-    @GetMapping("/registe/{idRegistre}")
-    public RegistreJugeNaiss getRegistres(@PathVariable int idActe)
-    {
-        return jugeNaissance.findByIdRegistre(idActe);
-    }
-
-    //supprimrer le registre de juge de naissance a partir de ID du Registre
-    @DeleteMapping("/{id}")
-    public String deleteRegistre(@PathVariable String id)
-        {
-            jugeNaissance.deleteActe(Integer.parseInt(id));
-            return "delete done";
-        }
-
-    //ajouter un registre de naissance
-    @PostMapping("/registre")
+    @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public String addRegistre(@RequestBody RegistreJugeNaiss registre)
+    public RegistreJugeNaiss addRegistre(@RequestBody RegistreJugeNaiss registre)
     {
-        jugeNaissance.addOrUpdateRegistre(registre);
-        return "add done";
+        return service.addRegistre(registre);
     }
 
-    //modifier un registre de juge de naissance
-    @PutMapping("/registre")
-    public String UpdateRegistre(@RequestBody RegistreJugeNaiss registre)
+    @PutMapping("")
+    @ResponseStatus(HttpStatus.CREATED)
+    public RegistreJugeNaiss updateRegistre(@RequestBody RegistreJugeNaiss registre)
     {
-        jugeNaissance.addOrUpdateRegistre(registre);
-        return "update registre ";
+        return service.updateRegistre(registre);
+    }
+
+
+    @GetMapping("")
+    public List<RegistreJugeNaiss> findRegistres(@RequestParam(required = false) Integer annee ){
+        return annee != null ? service.findByAnnee(annee) :
+                service.findAll();
+    }
+
+    @GetMapping("/{idOrPartieAnnee}")
+    public RegistreJugeNaiss findByIdOrPartieAnnee(@PathVariable String idOrPartieAnnee) {
+        try {
+            if(idOrPartieAnnee.matches("[0-9]+-[0-9]{4}")) {
+                String[] partieAnnee = idOrPartieAnnee.split("-");
+                return service.findByAnneeAndPartie(
+                        Integer.parseInt(partieAnnee[1]),
+                        Integer.parseInt(partieAnnee[0])
+                );
+            }
+            return service.findByIdJuge(Integer.parseInt(idOrPartieAnnee));
+        } catch (NumberFormatException e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Identificateur invalide.");
+        }
+    }
+
+    @DeleteMapping ("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteRegistreNaissance(@PathVariable String id) {
+        try {
+            service.deleteRegistre(Integer.parseInt(id));
+
+        } catch (NumberFormatException e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Identificateur invalide.");
+        }
     }
 
 }

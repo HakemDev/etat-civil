@@ -5,47 +5,55 @@ import com.civil.project.jugesNaissances.service.MarginaleFrJugeNaissanceService
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/jugeNaissance")
+@RequestMapping("/marginales-juges-naissances-fr")
 @RequiredArgsConstructor
 public class MarginaleFrJugeNaissanceRest {
     private final MarginaleFrJugeNaissanceService jugeNaissance;
 
-/////////////////////////////Partie Marginale francais de juge de naissance
+/////////////////////////////Partie Marginale Frabe de juge de naissance
 
-    //ajouter marginal francais de juge de naissance
-    @PostMapping("/marginal/francais")
+    //ajouter marginal arabic de juge de naissance
+    @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public String save(@RequestBody MargJugeNaissFr margJugeNaissFr){
-        jugeNaissance.AjouterOuModifierMargFR(margJugeNaissFr);
-        return "marginale francais DE JUGE DE NAISSANCE EST AJOUTE AVEC SUCCESS";
+    public MargJugeNaissFr save(@RequestBody MargJugeNaissFr margJugeNaissFr) {
+        return jugeNaissance.AjouterOuModifierMargFR(margJugeNaissFr);
     }
 
-    //afficher les marginales francais de juge de naissance
-    @GetMapping("/marginales/francais")
-    public List<MargJugeNaissFr> listMarg_fr(){
-        return jugeNaissance.afficherMarginalFr();
+
+    @PutMapping("")
+    public MargJugeNaissFr updateMarg(@RequestBody MargJugeNaissFr margJugeNaissFr) {
+        return jugeNaissance.updateMarg(margJugeNaissFr);
     }
 
-    //supprimer marginal francais de juge de naissance
-    @DeleteMapping("/marginal/francais/{id}")
-    public String deleteMarg_fr(@PathVariable String id){
-        jugeNaissance.SupprimerMargFR(Integer.parseInt(id));
-        return "Marginale de juge de naissance est supprimer";
+
+    //supprimer marginal arabic de juge de naissance
+    @DeleteMapping("/{id}")
+    public void deleteMarg_ar(@PathVariable String idMargeJuge){
+        jugeNaissance.SupprimerMargFR(Integer.parseInt(idMargeJuge));
     }
 
-    //chercher le marginal francais de juge de naissance a partir de id d'acte de juge de naissance
-    @GetMapping("/marginales/francais/{id}")
-    public List<MargJugeNaissFr> listByActeIdMargfr(@PathVariable String id){
-        return jugeNaissance.MargFrByIdActeJugeNaissance(Integer.parseInt(id));
+    //chercher le marginal arabic de juge de naissance a partir de id acte de juge de naissance
+    @GetMapping("")
+    public List<MargJugeNaissFr> listByActeIdMargar(@RequestParam(required = false) String idJuge){
+
+        try {
+            if(idJuge == null)
+                return jugeNaissance.afficherMarginalFr();
+
+            return jugeNaissance.MargFrByIdActeJugeNaissance(Integer.parseInt(idJuge));
+        }   catch (NumberFormatException e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Identificateur invalide.");
+        }
     }
 
-    //chercher le marginal francais de juge de naissance a partir de id du marginale de juge de naissance
-    @GetMapping("/marginal/francais/{id}")
-    public MargJugeNaissFr listByIdMargfr(@PathVariable String id){
+    //chercher le marginal arabic de juge de naissance a partir de id du marginale de juge de naissance
+    @GetMapping("/{id}")
+    public MargJugeNaissFr listByIdMargar(@PathVariable String id){
         return jugeNaissance.MargFrById(Integer.parseInt(id));
     }
 

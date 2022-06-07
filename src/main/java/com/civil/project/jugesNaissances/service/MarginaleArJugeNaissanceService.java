@@ -13,4 +13,5 @@ public interface MarginaleArJugeNaissanceService {
     void SupprimerMargAr(int idMargeJuge);
     List<MargJugeNaissAr> MargArByIdActeJugeNaissance(int id);
     MargJugeNaissAr MargArById(int id);
+    MargJugeNaissAr updateMarg(MargJugeNaissAr margJugeNaissAr);
 }

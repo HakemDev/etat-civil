@@ -16,9 +16,7 @@ public class RegistreJugeNaiss {
     @Id
     @Column(name = "id_registre")
     private int idRegistre;
-  
-    @Column(name = "id_utilisateur")
-    private int idUtilisateur;
+
 
     @Column(name="date_edition")
     private  String edition;
@@ -51,4 +49,18 @@ public class RegistreJugeNaiss {
     @JoinColumn(name="id_registre")
     @JsonIgnore
     private List<ActeJugeNaissancee> actesjugenaissancee;
+
+    @Override
+    public String toString() {
+        return "RegistreJugeNaiss{" +
+                "idRegistre=" + idRegistre +
+                ", edition='" + edition + '\'' +
+                ", tribunal='" + tribunal + '\'' +
+                ", annee=" + annee +
+                ", partie=" + partie +
+                ", dernierNumero=" + dernierNumero +
+                ", nombreActes=" + nombreActes +
+                ", premierNumero=" + premierNumero +
+                '}';
+    }
 }

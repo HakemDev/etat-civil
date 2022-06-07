@@ -44,4 +44,18 @@ public class RegistreJugesDeces {
     @JsonIgnore
     private List<JugeDeces> jugeDeces;
 
+    @Override
+    public String toString() {
+        return "RegistreJugesDeces{" +
+                "idRegistreDeces=" + idRegistreDeces +
+                ", annee=" + annee +
+                ", dateEdition='" + dateEdition + '\'' +
+                ", nombreJuges=" + nombreJuges +
+                ", premierNumero=" + premierNumero +
+                ", dernierNumero=" + dernierNumero +
+                ", partie=" + partie +
+                ", tribunal='" + tribunal + '\'' +
+
+                '}';
+    }
 }

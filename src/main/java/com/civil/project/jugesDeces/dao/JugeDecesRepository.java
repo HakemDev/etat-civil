@@ -13,4 +13,8 @@ public interface JugeDecesRepository extends JpaRepository<JugeDeces,Integer> {
     Set<JugeDeces> findJugeDecesByNomAr(String nomAr);
 
     Set<JugeDeces> findJugeDecesByNomFr(String nomAr);
+
+    List<JugeDeces> findBySexeFr(String homme);
+
+    List<JugeDeces> findBySexeAr(String femme);
 }

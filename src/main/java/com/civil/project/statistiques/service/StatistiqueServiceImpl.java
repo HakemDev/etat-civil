@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.text.DecimalFormat;
 import java.util.stream.Collectors;
@@ -193,6 +194,94 @@ public class StatistiqueServiceImpl implements StatistiqueService{
         }
         
         return statistiquesAdulte;
+    }
+/*
+    private final JugeNaissanceActeRep jugeNaissanceActeRep;
+    private final NaissanceActeRepository naissanceActeRepository;
+    private final JugeDecesRepository jugeDecesRepository;
+    private final DecesActeRep decesActeRep;
+ */
+    //الجدول السنوي
+    @Override
+    public List<StatistiqueAdulte> annuel(String choix, int annee) {
+        List<StatistiqueAdulte> statistiqueAdultes=new ArrayList<>();
+        switch (choix)
+            {
+                case "naissance":
+                    List<ActeNaissance> acteNaissances=naissanceActeRepository.findByAnnee(annee);
+                    for(ActeNaissance acteNaissance:acteNaissances)
+                        {
+                            StatistiqueAdulte statistiqueAdulte=new StatistiqueAdulte(
+                                    acteNaissance.getNumeroActe(),
+                                    acteNaissance.getNomAr(),
+                                    acteNaissance.getPrenomAr(),
+                                    acteNaissance.getDateNaissance().toString(),
+                                    acteNaissance.getDateEdition().toString(),
+                                    annee,
+                                    0
+                            );
+                            statistiqueAdultes.add(statistiqueAdulte);
+                        }
+                    break;
+                case "jugeNaissance":
+                    List<ActeJugeNaissancee> acteJugeNaissancees=jugeNaissanceActeRep.findByAnnee(annee);
+                    for(ActeJugeNaissancee acteJugeNaissancee:acteJugeNaissancees)
+                        {
+                            StatistiqueAdulte statistiqueAdulte=new StatistiqueAdulte(
+                                    acteJugeNaissancee.getNumeroActe(),
+                                    acteJugeNaissancee.getNomAr(),
+                                    acteJugeNaissancee.getPrenomAr(),
+                                    acteJugeNaissancee.getDateNaissance(),
+                                    acteJugeNaissancee.getDateEdition(),
+                                    annee,
+                                    0
+                            );
+                            statistiqueAdultes.add(statistiqueAdulte);
+                        }
+                    break;
+                case "deces":
+                    List<ActeDeces> acteDeces=decesActeRep.findAll();
+                    List<ActeDeces> acteDecesList=  acteDeces
+                            .stream()
+                            .filter(q->Integer.parseInt(q.getDateDeces().toString().split("-")[0])==annee)
+                            .collect(Collectors.toList());
+                    for(ActeDeces acteDeces1:acteDecesList)
+                        {
+                            StatistiqueAdulte statistiqueAdulte=new StatistiqueAdulte(
+                                    acteDeces1.getNumDeces(),
+                                    acteDeces1.getNomAr(),
+                                    acteDeces1.getPrenomAr(),
+                                    acteDeces1.getDateDeces().toString(),
+                                    acteDeces1.getDateEdition().toString(),
+                                    annee,
+                                    0
+                              );
+                            statistiqueAdultes.add(statistiqueAdulte);
+                        }
+                    break;
+                case "jugeDeces":
+                    List<JugeDeces> jugeDeces=jugeDecesRepository.findAll();
+                    List<JugeDeces> jugeDecesList=jugeDeces
+                                    .stream()
+                                    .filter(q->Integer.parseInt(q.getDateDeces().toString().split("-")[0])==annee)
+                                    .collect(Collectors.toList());
+                    for(JugeDeces jugeDeces1:jugeDecesList)
+                        {
+                            StatistiqueAdulte statistiqueAdulte=new StatistiqueAdulte(
+                                    jugeDeces1.getNumJugeDeces(),
+                                    jugeDeces1.getNomAr(),
+                                    jugeDeces1.getPrenomAr(),
+                                    jugeDeces1.getDateDeces().toString(),
+                                    jugeDeces1.getDateEdition().toString(),
+                                    annee,
+                                    0
+                            );
+                            statistiqueAdultes.add(statistiqueAdulte);
+                        }
+                    break;
+            }
+
+        return statistiqueAdultes;
     }
 
 

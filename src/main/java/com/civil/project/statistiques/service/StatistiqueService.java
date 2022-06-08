@@ -12,4 +12,6 @@ public interface StatistiqueService {
     StatistiqueNbrActesSexe resume(int mois, int annee);
 
     List<StatistiqueAdulte> adulte(int ans, int annee);
+
+    List<StatistiqueAdulte> annuel(String choix, int annee);
 }

@@ -33,9 +33,15 @@ public class StatistiqueRest {
                return statistiqueService.resume(Integer.parseInt(mois),Integer.parseInt(Annee));
             }
 
-@GetMapping("/enfants")
+    @GetMapping("/enfants")
     public List<StatistiqueAdulte> adulte(@RequestParam(required = true) String ans,@RequestParam(required = true) String Annee)
         {
             return statistiqueService.adulte(Integer.parseInt(ans),Integer.parseInt(Annee));
         }
-}
+
+    @GetMapping("/annuel")
+    public List<StatistiqueAdulte> annuel(@RequestParam(required=true) String choix,@RequestParam(required = true) String Annee)
+        {
+              return statistiqueService.annuel(choix,Integer.parseInt(Annee))  ;
+        }
+   }

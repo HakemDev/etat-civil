@@ -1,6 +1,8 @@
 package com.civil.project.jugesDeces.service;
 
 import com.civil.project.jugesDeces.dao.JugeDecesRepository;
+import com.civil.project.jugesDeces.dao.MargJugeDecesArRepository;
+import com.civil.project.jugesDeces.dao.MargJugeDecesFrRepository;
 import com.civil.project.jugesDeces.dao.RegistreJugeDecesRepository;
 import com.civil.project.jugesDeces.entity.JugeDeces;
 import com.civil.project.jugesDeces.entity.RegistreJugesDeces;
@@ -20,6 +22,9 @@ public class JugesDecesServiceImpl implements JugesDecesService{
     private final JugeDecesRepository repo;
 
     private final RegistreJugeDecesRepository registreRepo;
+
+    private final MargJugeDecesArRepository margArRep;
+    private final MargJugeDecesFrRepository margFrRep;
 
     @Override
     public JugeDeces addJuge(JugeDeces jugeDeces) {
@@ -67,6 +72,8 @@ public class JugesDecesServiceImpl implements JugesDecesService{
 
     @Override
     public void deleteJuge(Integer idJuge) {
+        margArRep.deleteAll(margArRep.findMarginaleJugeDecesArByJugeDecesIddeces(idJuge));
+        margFrRep.deleteAll(margFrRep.findMarginaleJugeDecesFrByJugeDecesIddeces(idJuge));
         repo.deleteById(idJuge);
     }
 

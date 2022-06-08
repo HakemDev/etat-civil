@@ -1,6 +1,8 @@
 package com.civil.project.jugesNaissances.service;
 
 import com.civil.project.jugesNaissances.dao.JugeNaissanceActeRep;
+import com.civil.project.jugesNaissances.dao.JugeNaissanceMargArRep;
+import com.civil.project.jugesNaissances.dao.JugeNaissanceMargFrRep;
 import com.civil.project.jugesNaissances.dao.JugeNaissanceRegistreRep;
 import com.civil.project.jugesNaissances.entity.ActeJugeNaissancee;
 import com.civil.project.jugesNaissances.entity.RegistreJugeNaiss;
@@ -16,6 +18,9 @@ import java.util.*;
     public class ActeJugeNaissanceServiceImpl implements ActeJugeNaissanceService{
     private final JugeNaissanceActeRep jugeNaissanceActeRep;
     private final JugeNaissanceRegistreRep jugeNaissanceRegistreRep;
+    private final JugeNaissanceMargArRep margArRep;
+    private final JugeNaissanceMargFrRep margFrRep;
+
 
     @Override
     public ActeJugeNaissancee AjouterOuModifierActeJugNaissa(ActeJugeNaissancee acteJugeNaissance) {
@@ -55,6 +60,9 @@ import java.util.*;
 
     @Override
     public void SupprimerActeJugeNaiss(int idActeJugeNais) {
+
+        margArRep.deleteAll(margArRep.findByActeNaissanceIdNaissance(idActeJugeNais));
+        margFrRep.deleteAll(margFrRep.findByActeNaissanceIdNaissance(idActeJugeNais));
         jugeNaissanceActeRep.deleteById(idActeJugeNais);
     }
 

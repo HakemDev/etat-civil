@@ -2,6 +2,8 @@ package com.civil.project.deces.service;
 
 import com.civil.project.deces.dao.DecesActeRep;
 import com.civil.project.deces.dao.DecesRegistreRep;
+import com.civil.project.deces.dao.MarginaleDecesArRepository;
+import com.civil.project.deces.dao.MarginaleDecesFrRepository;
 import com.civil.project.deces.entity.ActeDeces;
 import com.civil.project.deces.entity.RegistreDeces;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,8 @@ public class ActeDecesServiceImpl implements ActeDecesService {
 
     private final DecesActeRep rep;
     private final DecesRegistreRep decesRegistreRep;
+    private final MarginaleDecesFrRepository frRepository;
+    private final MarginaleDecesArRepository arRepository;
 
 
     @Override
@@ -116,5 +120,9 @@ public class ActeDecesServiceImpl implements ActeDecesService {
     }
 
     @Override
-    public void supprimerActeD(int i) { rep.deleteById(i); }
+    public void supprimerActeD(int i) {
+        arRepository.deleteAll(arRepository.findMarginaleDecesArByActeDecesIdDeces(i));
+
+        frRepository.deleteAll(frRepository.findMarginaleDecesFrByActeDecesIdDeces(i));
+        rep.deleteById(i); }
 }

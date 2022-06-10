@@ -1,17 +1,16 @@
 package com.civil.project.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
+@Builder
 public class AuthenticationResponse  {
 
-    private final String jwt;
-
-    public AuthenticationResponse(String jwt) {
-        this.jwt = jwt;
-    }
-
-
+    private String accessToken;
+    private String nomAr;
+    private String nomFr;
+    private String prenomFr;
+    private String prenomAr;
+    private String role;
+    
 }

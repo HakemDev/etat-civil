@@ -2,23 +2,31 @@ package com.civil.project.security.service;
 
 import com.civil.project.security.dao.UtilisateurRepository;
 import com.civil.project.security.entity.Utilisateur;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UtilisateurServiceImpl implements UtilisateurService{
 
-    @Autowired
-    private UtilisateurRepository utlRep;
+    private final UtilisateurRepository utlRep;
 
     ///chercher tous les utilisateur
     @Override
     public List<Utilisateur> findUtilisateur() {
-        System.out.println(utlRep.findAll().get(0).getRegistresjugenaissa());
         return utlRep.findAll();
     }
+
+    @Override
+    public Utilisateur findByLogin(String login) {
+        Optional<Utilisateur> user = utlRep.findByLogin(login);
+        return user.orElse(null);
+    }
+
 
     ///chercher les utilisateur selon leur role
     @Override

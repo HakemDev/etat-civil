@@ -3,6 +3,7 @@ package com.civil.project.security.service;
 import com.civil.project.security.dao.UtilisateurRepository;
 import com.civil.project.security.entity.Utilisateur;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -30,9 +31,13 @@ public class UtilisateurServiceImpl implements UtilisateurService{
 
     ///chercher les utilisateur selon leur role
     @Override
-    public List<Utilisateur> findByRole(String role) {
+    public Utilisateur findById(int id) {
 
-        return utlRep.findByRole(role);
+        Optional<Utilisateur> byId = utlRep.findById(id);
+        if (byId.isPresent())
+            return byId.get();
+
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Utilisateur non trouve");
     }
     ///ajouter ou supprimer un utilisateur
     @Override

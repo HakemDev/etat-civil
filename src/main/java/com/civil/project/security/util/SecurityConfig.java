@@ -54,6 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/auth/verify").authenticated()
                 .antMatchers(HttpMethod.PUT,paths).hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE,paths).hasRole("ADMIN")
+                .antMatchers("/utilisateur/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and().
                 exceptionHandling().authenticationEntryPoint(authenticationEntryPoint())

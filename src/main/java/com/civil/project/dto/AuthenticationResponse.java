@@ -12,5 +12,6 @@ public class AuthenticationResponse  {
     private String prenomFr;
     private String prenomAr;
     private String role;
+    private String login;
     
 }

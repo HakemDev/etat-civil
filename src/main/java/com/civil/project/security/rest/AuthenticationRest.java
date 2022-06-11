@@ -54,9 +54,9 @@ public class AuthenticationRest {
                         .prenomFr(user.getPrenomFr())
                         .nomFr(user.getNomFr())
                         .role(user.getRole())
+                        .login(user.getLogin())
                         .build());
     }
-
 
     @PostMapping("/verify")
     public ResponseEntity<?> verifyToken() {

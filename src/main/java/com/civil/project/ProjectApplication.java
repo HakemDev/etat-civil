@@ -37,7 +37,7 @@ public class ProjectApplication implements CommandLineRunner {
 		}
 
 		Utilisateur admin =	Utilisateur.builder()
-				.motDePasse(password)
+				.motDePasse( encoder.encode(password))
 				.login(login)
 				.nomAr(nomAr)
 				.nomFr(nomFr)

@@ -34,12 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final MyUserDetailsService myUserDetailsService;
     private final JwtRequestFilter jwtRequestFilter;
-    private final String[] paths = {"/deces/**","/marginales-deces-ar/**"
-    ,"/marginales-deces-fr/**", "/registre-actes-deces/**","/juge-deces/**",
-    "/marginales-juges-deces-ar/**", "/marginales-juges-deces-fr/**","/registre-juges-deces/**",
-    "/juges-naissance/**", "/marginales-juges-naissances-ar/**","/marginales-juges-naissances-fr/**",
-    "/registres-juges-naissance/**","/acte/**","/marginales-fr/**","/marginales-ar/**",
-    "/registre-naissance/**",
+    private final String[] paths = {"/api/deces/**", "/api/marginales-deces-ar/**", "/api/marginales-deces-fr/**", "/api/registre-actes-deces/**", "/api/juge-deces/**", "/api/marginales-juges-deces-ar/**", "/api/marginales-juges-deces-fr/**", "/api/registre-juges-deces/**", "/api/juges-naissance/**", "/api/marginales-juges-naissances-ar/**", "/api/marginales-juges-naissances-fr/**", "/api/registres-juges-naissance/**", "/api/acte/**", "/api/marginales-fr/**", "/api/marginales-ar/**", "/api/registre-naissance/**",
     };
 
     @Override
@@ -50,12 +45,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().cors().and()
                 .authorizeRequests()
-                .antMatchers("/auth/login").permitAll()
-                .antMatchers("/auth/verify").authenticated()
+                .antMatchers("/api/auth/login").permitAll()
+                .antMatchers("/api/auth/verify").authenticated()
                 .antMatchers(HttpMethod.PUT,paths).hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE,paths).hasRole("ADMIN")
                 .antMatchers("/utilisateur/**").hasRole("ADMIN")
-                .anyRequest().authenticated()
+                .antMatchers("/api/**").authenticated()
+                .anyRequest().permitAll()
                 .and().
                 exceptionHandling().authenticationEntryPoint(authenticationEntryPoint())
                 .accessDeniedHandler(accessDeniedHandler());

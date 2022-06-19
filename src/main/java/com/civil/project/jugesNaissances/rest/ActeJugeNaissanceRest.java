@@ -9,7 +9,7 @@ import javax.persistence.Column;
 import java.util.List;
 
 @RestController
-@RequestMapping("/juges-naissance")
+@RequestMapping("/api/juges-naissance")
 @RequiredArgsConstructor
 @CrossOrigin
 public class ActeJugeNaissanceRest {

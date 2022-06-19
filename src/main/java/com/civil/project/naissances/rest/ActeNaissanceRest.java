@@ -13,7 +13,7 @@ import java.util.Collection;
 
 
 @RestController
-@RequestMapping("/acte")
+@RequestMapping("/api/acte")
 @RequiredArgsConstructor
 @CrossOrigin
 public class ActeNaissanceRest {

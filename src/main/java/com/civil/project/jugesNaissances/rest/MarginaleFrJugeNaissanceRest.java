@@ -10,7 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/marginales-juges-naissances-fr")
+@RequestMapping("/api/marginales-juges-naissances-fr")
 @RequiredArgsConstructor
 @CrossOrigin
 public class MarginaleFrJugeNaissanceRest {

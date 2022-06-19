@@ -19,6 +19,10 @@ public class ActeDeces {
     @Column(name = "adresse_parent_ar")
     private String adresseParentAr;
 
+    private String acteFr;
+
+    private String acteAr;
+
     @Column(name = "adresse_parent_fr")
     private String adresseParentFr;
 

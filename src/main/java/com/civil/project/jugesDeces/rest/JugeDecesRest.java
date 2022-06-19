@@ -10,7 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/juge-deces")
+@RequestMapping("/api/juge-deces")
 @RequiredArgsConstructor
 @CrossOrigin
 public class JugeDecesRest {

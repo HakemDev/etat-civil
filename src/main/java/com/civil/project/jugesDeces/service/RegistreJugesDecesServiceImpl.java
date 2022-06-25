@@ -1,5 +1,6 @@
 package com.civil.project.jugesDeces.service;
 
+import com.civil.project.jugesDeces.dao.JugeDecesRepository;
 import com.civil.project.jugesDeces.dao.RegistreJugeDecesRepository;
 import com.civil.project.jugesDeces.entity.RegistreJugesDeces;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,7 @@ import java.util.Optional;
 public class RegistreJugesDecesServiceImpl implements RegistreJugesDecesService{
 
     private final RegistreJugeDecesRepository repository;
-
+    private final JugeDecesRepository jugeRepo;
     @Override
     public List<RegistreJugesDeces> getAllRegistreJugesDeces() {
         return repository.findAll();
@@ -68,6 +69,7 @@ public class RegistreJugesDecesServiceImpl implements RegistreJugesDecesService{
         if(!byId.isPresent()){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Registre juge deces non trouve");
         }
+        jugeRepo.deleteAll(byId.get().getJugeDeces());
         repository.delete(byId.get());
 
     }

@@ -1,5 +1,6 @@
 package com.civil.project.deces.service;
 
+import com.civil.project.deces.dao.DecesActeRep;
 import com.civil.project.deces.dao.DecesRegistreRep;
 import com.civil.project.deces.entity.RegistreDeces;
 import com.civil.project.jugesDeces.entity.RegistreJugesDeces;
@@ -18,7 +19,7 @@ import java.util.Optional;
 public class RegistreDecesServiceImlp implements RegistreDecesService {
 
     private final DecesRegistreRep repository;
-
+    private final DecesActeRep decesActeRep;
     @Override
     public RegistreDeces ajouterRegistreD(RegistreDeces registreDeces) {
         RegistreDeces duplicateTest = repository
@@ -84,6 +85,7 @@ public class RegistreDecesServiceImlp implements RegistreDecesService {
         if( !byId.isPresent()){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Registre de deces non trouve");
         }
+        decesActeRep.deleteAll(byId.get().getActesDeces());
         repository.deleteById(i);
     }
 

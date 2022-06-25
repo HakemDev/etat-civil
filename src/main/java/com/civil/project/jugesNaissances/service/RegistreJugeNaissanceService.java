@@ -49,6 +49,7 @@ public class RegistreJugeNaissanceService {
         Optional<RegistreJugeNaiss> resultat=registreRepository.findById(id);
         if( !resultat.isPresent())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Registre non trouve");
+        acteRep.deleteAll(resultat.get().getActesjugenaissancee());
         registreRepository.delete(resultat.get());
     }
 

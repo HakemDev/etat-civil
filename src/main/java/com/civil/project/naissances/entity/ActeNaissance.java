@@ -1,10 +1,12 @@
 package com.civil.project.naissances.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -215,7 +217,15 @@ public class ActeNaissance {
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH,CascadeType.PERSIST,
             CascadeType.MERGE,CascadeType.REFRESH})
     @JoinColumn(name = "id_registre")
-
     private RegistreNaiss registre;
+
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "acteNaissance",cascade = CascadeType.REMOVE )
+    private List<MargNaisFr> margNaisFrList;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "acteNaissance",cascade = CascadeType.REMOVE )
+    private List<MargNaisAr> margNaisArList;
 
 }

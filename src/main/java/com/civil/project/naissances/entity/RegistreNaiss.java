@@ -48,8 +48,7 @@ public class RegistreNaiss {
     @OneToMany(
             mappedBy = "registre",
             fetch = FetchType.LAZY,
-            cascade = {CascadeType.DETACH,CascadeType.PERSIST,
-                    CascadeType.MERGE,CascadeType.REFRESH, CascadeType.ALL})
+            cascade = {CascadeType.ALL})
     @JsonIgnore
     private List<ActeNaissance> actes;
 

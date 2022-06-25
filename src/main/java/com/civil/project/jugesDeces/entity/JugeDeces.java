@@ -1,9 +1,11 @@
 package com.civil.project.jugesDeces.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "juge_deces")
@@ -190,5 +192,14 @@ public class JugeDeces {
             CascadeType.MERGE,CascadeType.REFRESH})
     @JoinColumn(name = "id_registre_juges_deces")
     RegistreJugesDeces registreJugesDeces;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "jugeDeces",cascade = CascadeType.REMOVE )
+    private List<MarginaleJugeDecesFr> marginaleJugeDecesFrList;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "jugeDeces",cascade = CascadeType.REMOVE )
+    private List<MarginaleJugeDecesAr> marginaleJugeDecesArList;
+
 
 }

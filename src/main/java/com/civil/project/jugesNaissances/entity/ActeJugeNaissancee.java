@@ -1,5 +1,6 @@
 package com.civil.project.jugesNaissances.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import lombok.Data;
 import lombok.ToString;
@@ -229,7 +230,13 @@ public class ActeJugeNaissancee {
     private RegistreJugeNaiss registreJugeNaiss;
 
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "acteNaissance",cascade = CascadeType.REMOVE )
+    private List<MargJugeNaissAr> margJugeNaissArs;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "acteNaissance",cascade = CascadeType.REMOVE )
+    private List<MargJugeNaissFr> margJugeNaissFrs;
 
 
 

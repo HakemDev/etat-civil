@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(value = {"{_:^(?!api).*$}","/error"})
+@RequestMapping(value = {"{_:^(?!api).*$}"})
 public class FrontEndController {
 
     @GetMapping({"","/","/*"})
